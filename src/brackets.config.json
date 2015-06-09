@@ -1,8 +1,8 @@
 {
     "config"                :
     {
-        "app_title"                  : "Brackets",
-        "app_name_about"             : "Brackets",
+        "app_title"                  : "ArduinoStudio",
+        "app_name_about"             : "ArduinoStudio",
         "about_icon"                 : "styles/images/brackets_icon.svg",
         "update_info_url"            : "http://s3.amazonaws.com/files.brackets.io/updates/stable/",
         "how_to_use_url"             : "https://github.com/adobe/brackets/wiki/How-to-Use-Brackets",

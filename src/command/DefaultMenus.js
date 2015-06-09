@@ -51,12 +51,12 @@ define(function (require, exports, module) {
         menu.addMenuItem(Commands.FILE_SAVE);
         menu.addMenuItem(Commands.FILE_SAVE_ALL);
         menu.addMenuItem(Commands.FILE_SAVE_AS);
-        menu.addMenuDivider();
-        menu.addMenuItem(Commands.FILE_LIVE_FILE_PREVIEW);
-        menu.addMenuItem(Commands.TOGGLE_LIVE_PREVIEW_MB_MODE);
-        menu.addMenuItem(Commands.FILE_PROJECT_SETTINGS);
-        menu.addMenuDivider();
-        menu.addMenuItem(Commands.FILE_EXTENSION_MANAGER);
+        //menu.addMenuDivider();
+        //menu.addMenuItem(Commands.FILE_LIVE_FILE_PREVIEW);
+        //menu.addMenuItem(Commands.TOGGLE_LIVE_PREVIEW_MB_MODE);
+        //menu.addMenuItem(Commands.FILE_PROJECT_SETTINGS);
+        //menu.addMenuDivider();
+        //menu.addMenuItem(Commands.FILE_EXTENSION_MANAGER);
         
         // suppress redundant quit menu item on mac
         if (brackets.platform !== "mac" || !brackets.nativeMenus) {
@@ -118,12 +118,12 @@ define(function (require, exports, module) {
          * View menu
          */
         menu = Menus.addMenu(Strings.VIEW_MENU, Menus.AppMenuBar.VIEW_MENU);
-        menu.addMenuItem(Commands.CMD_THEMES_OPEN_SETTINGS);
-        menu.addMenuDivider();
-        menu.addMenuItem(Commands.CMD_SPLITVIEW_NONE);
-        menu.addMenuItem(Commands.CMD_SPLITVIEW_VERTICAL);
-        menu.addMenuItem(Commands.CMD_SPLITVIEW_HORIZONTAL);
-        menu.addMenuDivider();
+        //menu.addMenuItem(Commands.CMD_THEMES_OPEN_SETTINGS);
+        //menu.addMenuDivider();
+        //menu.addMenuItem(Commands.CMD_SPLITVIEW_NONE);
+        //menu.addMenuItem(Commands.CMD_SPLITVIEW_VERTICAL);
+        //menu.addMenuItem(Commands.CMD_SPLITVIEW_HORIZONTAL);
+        //menu.addMenuDivider();
         menu.addMenuItem(Commands.VIEW_HIDE_SIDEBAR);
         menu.addMenuDivider();
         menu.addMenuItem(Commands.VIEW_INCREASE_FONT_SIZE);
@@ -141,50 +141,52 @@ define(function (require, exports, module) {
         /*
          * Navigate menu
          */
-        menu = Menus.addMenu(Strings.NAVIGATE_MENU, Menus.AppMenuBar.NAVIGATE_MENU);
-        menu.addMenuItem(Commands.NAVIGATE_QUICK_OPEN);
-        menu.addMenuItem(Commands.NAVIGATE_GOTO_LINE);
-        menu.addMenuItem(Commands.NAVIGATE_GOTO_DEFINITION);
-        menu.addMenuItem(Commands.NAVIGATE_JUMPTO_DEFINITION);
-        menu.addMenuItem(Commands.NAVIGATE_GOTO_FIRST_PROBLEM);
-        menu.addMenuDivider();
-        menu.addMenuItem(Commands.NAVIGATE_NEXT_DOC);
-        menu.addMenuItem(Commands.NAVIGATE_PREV_DOC);
-        menu.addMenuDivider();
-        menu.addMenuItem(Commands.NAVIGATE_SHOW_IN_FILE_TREE);
-        menu.addMenuDivider();
-        menu.addMenuItem(Commands.TOGGLE_QUICK_EDIT);
-        menu.addMenuItem(Commands.QUICK_EDIT_PREV_MATCH);
-        menu.addMenuItem(Commands.QUICK_EDIT_NEXT_MATCH);
-        menu.addMenuItem(Commands.CSS_QUICK_EDIT_NEW_RULE);
-        menu.addMenuDivider();
-        menu.addMenuItem(Commands.TOGGLE_QUICK_DOCS);
+        //menu = Menus.addMenu(Strings.NAVIGATE_MENU, Menus.AppMenuBar.NAVIGATE_MENU);
+        //menu.addMenuItem(Commands.NAVIGATE_QUICK_OPEN);
+        //menu.addMenuItem(Commands.NAVIGATE_GOTO_LINE);
+        //menu.addMenuItem(Commands.NAVIGATE_GOTO_DEFINITION);
+        //menu.addMenuItem(Commands.NAVIGATE_JUMPTO_DEFINITION);
+        //menu.addMenuItem(Commands.NAVIGATE_GOTO_FIRST_PROBLEM);
+        //menu.addMenuDivider();
+        //menu.addMenuItem(Commands.NAVIGATE_NEXT_DOC);
+        //menu.addMenuItem(Commands.NAVIGATE_PREV_DOC);
+        //menu.addMenuDivider();
+        //menu.addMenuItem(Commands.NAVIGATE_SHOW_IN_FILE_TREE);
+        //menu.addMenuDivider();
+        //menu.addMenuItem(Commands.TOGGLE_QUICK_EDIT);
+        //menu.addMenuItem(Commands.QUICK_EDIT_PREV_MATCH);
+        //menu.addMenuItem(Commands.QUICK_EDIT_NEXT_MATCH);
+        //menu.addMenuItem(Commands.CSS_QUICK_EDIT_NEW_RULE);
+        //menu.addMenuDivider();
+        //menu.addMenuItem(Commands.TOGGLE_QUICK_DOCS);
         
         /*
          * Help menu
          */
         menu = Menus.addMenu(Strings.HELP_MENU, Menus.AppMenuBar.HELP_MENU);
-        menu.addMenuItem(Commands.HELP_CHECK_FOR_UPDATE);
 
-        menu.addMenuDivider();
-        if (brackets.config.how_to_use_url) {
-            menu.addMenuItem(Commands.HELP_HOW_TO_USE_BRACKETS);
-        }
-        if (brackets.config.support_url) {
-            menu.addMenuItem(Commands.HELP_SUPPORT);
-        }
-        if (brackets.config.suggest_feature_url) {
-            menu.addMenuItem(Commands.HELP_SUGGEST);
-        }
-        if (brackets.config.release_notes_url) {
-            menu.addMenuItem(Commands.HELP_RELEASE_NOTES);
-        }
-        if (brackets.config.get_involved_url) {
-            menu.addMenuItem(Commands.HELP_GET_INVOLVED);
-        }
-
-        menu.addMenuDivider();
-        menu.addMenuItem(Commands.HELP_SHOW_EXT_FOLDER);
+        // TODO: enable with correct pages and urls to arduino.org
+        //menu.addMenuItem(Commands.HELP_CHECK_FOR_UPDATE);
+        //
+        //menu.addMenuDivider();
+        //if (brackets.config.how_to_use_url) {
+        //    menu.addMenuItem(Commands.HELP_HOW_TO_USE_BRACKETS);
+        //}
+        //if (brackets.config.support_url) {
+        //    menu.addMenuItem(Commands.HELP_SUPPORT);
+        //}
+        //if (brackets.config.suggest_feature_url) {
+        //    menu.addMenuItem(Commands.HELP_SUGGEST);
+        //}
+        //if (brackets.config.release_notes_url) {
+        //    menu.addMenuItem(Commands.HELP_RELEASE_NOTES);
+        //}
+        //if (brackets.config.get_involved_url) {
+        //    menu.addMenuItem(Commands.HELP_GET_INVOLVED);
+        //}
+        //
+        //menu.addMenuDivider();
+        //menu.addMenuItem(Commands.HELP_SHOW_EXT_FOLDER);
 
         var hasAboutItem = (brackets.platform !== "mac" || !brackets.nativeMenus);
         
