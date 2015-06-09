@@ -26,7 +26,7 @@
 
 define({
     // product-specific strings
-    "APP_NAME"                             : "Brackets",
+    "APP_NAME"                             : "Arduino Studio",
 
     // Self locales (used by Debug > Switch Language)
     "LOCALE_CS"                                 : "čeština",
