@@ -35,8 +35,6 @@ Installation
 ------------
 Ready-to-run software and instructions are available on [Labs](http://labs.arduino.org/tiki-index.php?page=Arduino+Studio)
 
-[Arduino.org](http://arduino.org) IDE is at this time developed, maintained and supported by the Arduino.org team: [support@arduino.org](mailto:support@arduino.org)
-
 Credits
 --------
 [Arduino.org](http://arduino.org) is an open source project, developed by many and based on:
@@ -48,7 +46,7 @@ Credits
 
 A special thanks to  Daniela Antonietti, Hernando Barragán, David Cuartielles, Ben Fry, Tom Igoe, Gianluca Martino, David A. Mellis, Massimo Banzi and Casey Reas for their works and inspirations.
 
-Arduino uses the [GNU avr-gcc toolchain](http://gcc.gnu.org/wiki/avr-gcc), [avrdude](http://www.nongnu.org/avrdude/), [avr-libc](http://www.nongnu.org/avr-libc/), and code from
+Arduino Studio uses the [GNU avr-gcc toolchain](http://gcc.gnu.org/wiki/avr-gcc), [avrdude](http://www.nongnu.org/avrdude/), [avr-libc](http://www.nongnu.org/avr-libc/), and code from
 [Processing](http://www.processing.org) and [Wiring](http://wiring.org.co).
 
 Icon and about image designed by [ToDo](http://www.todo.to.it/)
