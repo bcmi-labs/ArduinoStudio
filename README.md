@@ -18,20 +18,22 @@ Features
 Work in progress
 ----------------
 
-Community plugin manager. Contributed Themes, additional Functionalities and Libraries are 
+* Community plugin manager. Contributed Themes, additional Functionalities and Libraries are welcome!
+* Platform manager for third parties boards, architectures and toolchains;
 
-* For more information, please consult the website at: http://www.arduino.org/
+More Informations
+-----------------
 
-* To report a *bug* in the software or to request *a simple enhancement*, please go to:
-http://github.com/arduino-org/Arduino/issues
+* For more information, please visit http://www.arduino.org/
+* To report a *bug* or to make *a simple enhancement*, stop by https://github.com/arduino-org/ArduinoStudio/issues
 
-If you're interested in modifying or extending the [Arduino.org](http://arduino.org) software, we would be very happy if you did it! If you want to integrate your work into the official release please create a pull request at : https://github.com/arduino-org/Arduino/compare/
+If you're interested in modifying or extending the Arduino Studio software, we would be very happy if you did it! If you want to integrate your work into the official release please create a pull request at https://github.com/arduino-org/ArduinoStudio/compare
 
 If you're interested in collaborating please contact us!
 
 Installation
 ------------
-Ready-to-run software and instructions are available on : http://www.arduino.org/downloads
+Ready-to-run software and instructions are available on [Labs](http://labs.arduino.org/tiki-index.php?page=Arduino+Studio)
 
 [Arduino.org](http://arduino.org) IDE is at this time developed, maintained and supported by the Arduino.org team: [support@arduino.org](mailto:support@arduino.org)
 
@@ -42,6 +44,7 @@ Credits
 * The Arduino.cc IDE: http://www.arduino.cc/ 
 * The Wiring project: http://www.wiring.org.co/
 * The Processing project: http://processing.org
+* Adobe Brackets project: http://brackets.io/
 
 A special thanks to  Daniela Antonietti, Hernando Barragán, David Cuartielles, Ben Fry, Tom Igoe, Gianluca Martino, David A. Mellis, Massimo Banzi and Casey Reas for their works and inspirations.
 
