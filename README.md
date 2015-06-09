@@ -6,6 +6,20 @@ Arduino Studio
 * Arduino Studio is a new open source development environment for the Arduino Programming Language. Instead of a monolithic architecture and a centralized development model, Arduino Studio take advantage of Adobe Brackets  Editor's pluggable system. We are working hard to allow users to exploit Arduino Studio as stand-alone, web/cloud-based and on-board embedded editor. Just one editor for all the environments. 
 Arduino Studio is now available as an alpha release, in-bundle distribution for Linux, Mac OS X and Windows or as a easy-to-install Brackets Extension.
 
+Features
+--------
+
+* Take advantage of Brackets editor's architecture;
+* One editor for all environments: Cloud-based on your browser, Stand-alone on your PC and Embedded on your board;
+* Written in Javascript and Node.js as Brackets extensions or as a stand-alone software;
+* Brand new User Interface;
+* Code Completion and in-line Quick Language Reference;
+
+Work in progress
+----------------
+
+Community plugin manager. Contributed Themes, additional Functionalities and Libraries are 
+
 * For more information, please consult the website at: http://www.arduino.org/
 
 * To report a *bug* in the software or to request *a simple enhancement*, please go to:
