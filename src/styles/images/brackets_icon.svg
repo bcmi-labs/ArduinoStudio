@@ -1,21 +1,29 @@
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="120px" height="120px">
-	<defs>
-		<linearGradient id="frame" gradientUnits="userSpaceOnUse" x1="433.5" y1="-185" x2="433.5" y2="-277" gradientTransform="matrix(1 0 0 -1 -373.5 -177)">
-			<stop offset="0" stop-color="#29ABE2"/>
-			<stop offset="0.4757" stop-color="#28A9E1"/>
-			<stop offset="0.6639" stop-color="#23A2DC"/>
-			<stop offset="0.8012" stop-color="#1A96D4"/>
-			<stop offset="0.913" stop-color="#0E85C9"/>
-			<stop offset="1" stop-color="#0071BC"/>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 18.1.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="-237 360.9 120 120" enable-background="new -237 360.9 120 120" xml:space="preserve">
+<g>
+	<g>
+		<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="-177" y1="356.9834" x2="-177" y2="457.2753">
+			<stop  offset="0" style="stop-color:#85C0C1"/>
+			<stop  offset="0.9485" style="stop-color:#007481"/>
 		</linearGradient>
-		<filter id="blur" x="-10" y="-10" width="12" height="12">
-			<feGaussianBlur in="SourceGraphic" stdDeviation="1"/>
-		</filter>
-	</defs>
-	<rect id="shadow" x="10" y="9" width="100" height="100" rx="20" ry="20" opacity=".5" filter="url(#blur)"/>
-	<rect x="10" y="58" width="100" height="50" rx="20" ry="20" fill="#115A91"/>
-	<rect x="10" y="8" width="100" height="92" rx="20" ry="20" fill="url(#frame)"/>
-	<rect x="22" y="20" width="76" height="68" rx="10" ry="10" fill="#fff"/>
-	<path id="shadow2" opacity=".5" transform="translate(0, 1)" filter="url(#blur)" d="M57,28v12H43v26h14v13H30V28H57zM90,28v51H63V66h15V40H63V28H90z"/>
-	<path id="brackets" fill="#4D4D4D" d="M57,28v12H43v26h14v13H30V28H57zM90,28v51H63V66h15V40H63V28H90z"/>
+		<circle fill="url(#SVGID_1_)" cx="-177" cy="418.9" r="48.3"/>
+		<path fill="#DFEBEC" d="M-177,468.9c-27.6,0-50-22.4-50-50c0-27.6,22.4-50,50-50s50,22.4,50,50C-127,446.5-149.4,468.9-177,468.9z
+			 M-177,372.4c-25.7,0-46.5,20.9-46.5,46.5c0,25.7,20.9,46.5,46.5,46.5s46.5-20.9,46.5-46.5C-130.5,393.2-151.3,372.4-177,372.4z"
+			/>
+	</g>
+	<g>
+		<rect x="-200.9" y="417.2" fill="#DFEBEC" width="11" height="3.5"/>
+		<polygon fill="#DFEBEC" points="-153.2,417.2 -156.9,417.2 -156.9,413.4 -160.5,413.4 -160.5,417.2 -164.2,417.2 -164.2,420.7 
+			-160.5,420.7 -160.5,424.4 -156.9,424.4 -156.9,420.7 -153.2,420.7 		"/>
+		<path fill="#DFEBEC" d="M-158.1,436.6c-0.9,0-1.9-0.1-2.8-0.2c-7.8-1.1-13.1-6.8-16-11.1c-2.9,4.3-8.2,10-16,11.1
+			c-0.9,0.1-1.9,0.2-2.8,0.2c-4.9,0-9.5-1.8-12.9-5.1c-3.5-3.3-5.4-7.8-5.4-12.6c0-4.8,1.9-9.2,5.4-12.6c3.4-3.3,8-5.1,12.9-5.1
+			c0.9,0,1.9,0.1,2.8,0.2c7.8,1.1,13.1,6.8,16,11.1c2.9-4.3,8.2-10,16-11.1c0.9-0.1,1.9-0.2,2.8-0.2c4.9,0,9.5,1.8,12.9,5.1
+			c3.5,3.3,5.4,7.8,5.4,12.6c0,4.8-1.9,9.2-5.4,12.6C-148.7,434.7-153.2,436.6-158.1,436.6 M-173.5,418.9
+			c1.5,2.9,6.1,10.2,13.5,11.3c0.6,0.1,1.3,0.1,1.9,0.1c6.6,0,12-5.1,12-11.4c0-6.3-5.4-11.4-12.1-11.4c-0.6,0-1.3,0-1.9,0.1
+			C-167.5,408.7-172,416-173.5,418.9z M-195.9,407.5c-6.7,0-12.1,5.1-12.1,11.4c0,6.3,5.4,11.4,12.1,11.4c0.6,0,1.3,0,1.9-0.1
+			c7.4-1.1,11.9-8.3,13.5-11.3c-1.5-2.9-6.1-10.2-13.5-11.3C-194.6,407.5-195.2,407.5-195.9,407.5z"/>
+	</g>
+</g>
 </svg>
