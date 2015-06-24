@@ -43,6 +43,7 @@ define(function (require, exports, module) {
     require("widgets/bootstrap-modal");
     require("widgets/bootstrap-twipsy-mod");
     require("thirdparty/path-utils/path-utils.min");
+    require("thirdparty/smart-auto-complete-local/jquery.smart_autocomplete");
 
     // Load CodeMirror add-ons--these attach themselves to the CodeMirror module    
     require("thirdparty/CodeMirror2/addon/fold/xml-fold");
@@ -92,7 +93,9 @@ define(function (require, exports, module) {
         NativeApp               = require("utils/NativeApp"),
         DeprecationWarning      = require("utils/DeprecationWarning"),
         ViewCommandHandlers     = require("view/ViewCommandHandlers"),
-        MainViewManager         = require("view/MainViewManager");
+        MainViewManager         = require("view/MainViewManager"),
+		FileUtils				= require("file/FileUtils"),
+		Urls					= require("i18n!nls/urls");
 
     // load modules for later use
     require("utils/Global");
@@ -151,7 +154,6 @@ define(function (require, exports, module) {
     // read URL params
     params.parse();
     
-
     /**
      * Setup test object
      */
@@ -182,7 +184,12 @@ define(function (require, exports, module) {
             FileSyncManager         : FileSyncManager,
             FileSystem              : FileSystem,
             FileViewController      : FileViewController,
-            FileUtils               : require("file/FileUtils"),
+<<<<<<< HEAD
+=======
+            //FileUtils               : require("file/FileUtils"),   
+>>>>>>> c77dc418506ad2c46cc68bcd411a76a080662788
+            FileUtils               : FileUtils, 
+			Urls					: Urls,
             FindInFiles             : require("search/FindInFiles"),
             FindInFilesUI           : require("search/FindInFilesUI"),
             HTMLInstrumentation     : require("language/HTMLInstrumentation"),
@@ -268,10 +275,11 @@ define(function (require, exports, module) {
                     // an old version that might not have set the "afterFirstLaunch" pref.)
                     var deferred = new $.Deferred();
                     
-                    if (!params.get("skipSampleProjectLoad") && !PreferencesManager.getViewState("afterFirstLaunch")) {
+                     if (!params.get("skipSampleProjectLoad") && !PreferencesManager.getViewState("afterFirstLaunch")) {
                         PreferencesManager.setViewState("afterFirstLaunch", "true");
-                        if (ProjectManager.isWelcomeProjectPath(initialProjectPath)) {
-                            FileSystem.resolve(initialProjectPath + "index.html", function (err, file) {
+
+						if (ProjectManager.isWelcomeProjectPath(initialProjectPath)) {
+                            FileSystem.resolve(initialProjectPath.replace(Urls.GETTING_STARTED, '').replace('//', '/') + "blink.ino", function (err, file){                     
                                 if (!err) {
                                     var promise = CommandManager.execute(Commands.CMD_ADD_TO_WORKINGSET_AND_OPEN, { fullPath: file.fullPath });
                                     promise.then(deferred.resolve, deferred.reject);
@@ -325,7 +333,7 @@ define(function (require, exports, module) {
                 });
             });
         });
-
+        
         // Check for updates
         if (!params.get("skipUpdateCheck") && !brackets.inBrowser) {
             AppInit.appReady(function () {
@@ -339,7 +347,7 @@ define(function (require, exports, module) {
      * Setup event handlers prior to dispatching AppInit.HTML_READY
      */
     function _beforeHTMLReady() {
-        // Add the platform (mac, win or linux) to the body tag so we can have platform-specific CSS rules
+        // Add the platform (mac or win) to the body tag so we can have platform-specific CSS rules
         $("body").addClass("platform-" + brackets.platform);
         
         // Browser-hosted version may also have different CSS (e.g. since '#titlebar' is shown)
@@ -370,10 +378,36 @@ define(function (require, exports, module) {
         
         // Update title
         $("title").text(brackets.config.app_title);
-        
-        // Respond to dragging & dropping files/folders onto the window by opening them. If we don't respond
-        // to these events, the file would load in place of the Brackets UI
-        DragAndDrop.attachHandlers();
+            
+        // Prevent unhandled drag and drop of files into the browser from replacing 
+        // the entire Brackets app. This doesn't prevent children from choosing to
+        // handle drops.
+        $(window.document.body)
+            .on("dragover", function (event) {
+                var dropEffect = "none";
+                if (event.originalEvent.dataTransfer.files) {
+                    event.stopPropagation();
+                    event.preventDefault();
+                    // Don't allow drag-and-drop of files/folders when a modal dialog is showing.
+                    if ($(".modal.instance").length === 0 &&
+                            DragAndDrop.isValidDrop(event.originalEvent.dataTransfer.items)) {
+                        dropEffect = "copy";
+                    }
+                    event.originalEvent.dataTransfer.dropEffect = dropEffect;
+                }
+            })
+            .on("drop", function (event) {
+                var files = event.originalEvent.dataTransfer.files;
+                if (files && files.length) {
+                    event.stopPropagation();
+                    event.preventDefault();
+                    brackets.app.getDroppedFiles(function (err, paths) {
+                        if (!err) {
+                            DragAndDrop.openDroppedFiles(paths);
+                        }
+                    });
+                }
+            });
         
         // TODO: (issue 269) to support IE, need to listen to document instead (and even then it may not work when focus is in an input field?)
         $(window).focus(function () {
@@ -425,31 +459,7 @@ define(function (require, exports, module) {
                 node = node.parentElement;
             }
         }, true);
-
-        // on Windows, cancel every other scroll event (#10214)
-        // TODO: remove this hack when we upgrade CEF to a build with this bug fixed:
-        // https://bitbucket.org/chromiumembedded/cef/issue/1481
-        var winCancelWheelEvent = true;
-        function windowsScrollFix(e) {
-            winCancelWheelEvent = !winCancelWheelEvent;
-            if (winCancelWheelEvent) {
-                e.preventDefault();
-                e.stopImmediatePropagation();
-            }
-        }
-
-        function enableOrDisableWinScrollFix() {
-            window.document.body.removeEventListener("wheel", windowsScrollFix, true);
-            if (PreferencesManager.get("_windowsScrollFix")) {
-                window.document.body.addEventListener("wheel", windowsScrollFix, true);
-            }
-        }
-
-        if (brackets.platform === "win" && !brackets.inBrowser) {
-            PreferencesManager.definePreference("_windowsScrollFix", "boolean", true).on("change", enableOrDisableWinScrollFix);
-            enableOrDisableWinScrollFix();
-        }
-
+        
         // Prevent extensions from using window.open() to insecurely load untrusted web content
         var real_windowOpen = window.open;
         window.open = function (url) {
