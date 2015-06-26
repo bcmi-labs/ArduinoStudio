@@ -184,12 +184,8 @@ define(function (require, exports, module) {
             FileSyncManager         : FileSyncManager,
             FileSystem              : FileSystem,
             FileViewController      : FileViewController,
-<<<<<<< HEAD
-=======
-            //FileUtils               : require("file/FileUtils"),   
->>>>>>> c77dc418506ad2c46cc68bcd411a76a080662788
             FileUtils               : FileUtils, 
-			Urls					: Urls,
+	    Urls		    : Urls,
             FindInFiles             : require("search/FindInFiles"),
             FindInFilesUI           : require("search/FindInFilesUI"),
             HTMLInstrumentation     : require("language/HTMLInstrumentation"),
