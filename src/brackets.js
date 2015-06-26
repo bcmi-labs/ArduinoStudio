@@ -185,7 +185,7 @@ define(function (require, exports, module) {
             FileSystem              : FileSystem,
             FileViewController      : FileViewController,
             FileUtils               : FileUtils, 
-            Urls		    : Urls,
+            Urls                    : Urls,
             FindInFiles             : require("search/FindInFiles"),
             FindInFilesUI           : require("search/FindInFilesUI"),
             HTMLInstrumentation     : require("language/HTMLInstrumentation"),
@@ -271,7 +271,7 @@ define(function (require, exports, module) {
                     // an old version that might not have set the "afterFirstLaunch" pref.)
                     var deferred = new $.Deferred();
                     
-                     if (!params.get("skipSampleProjectLoad") && !PreferencesManager.getViewState("afterFirstLaunch")) {
+                    if (!params.get("skipSampleProjectLoad") && !PreferencesManager.getViewState("afterFirstLaunch")) {
                         PreferencesManager.setViewState("afterFirstLaunch", "true");
 			if (ProjectManager.isWelcomeProjectPath(initialProjectPath)) {
                             FileSystem.resolve(initialProjectPath.replace(Urls.GETTING_STARTED, '').replace('//', '/') + "blink.ino", function (err, file){                     
