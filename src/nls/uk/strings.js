@@ -432,7 +432,7 @@ define({
     "RELAUNCH_CHROME"                           : "Перезапустити Chrome",
     "ABOUT"                                     : "Про програму",
     "CLOSE"                                     : "Закрити",
-    "ABOUT_TEXT_LINE1"                          : "Версія {VERSION_MAJOR}.{VERSION_MINOR} {BUILD_TYPE} {VERSION}",
+    "ABOUT_TEXT_LINE1"                          : "Версія {VERSION_MAJOR}.{VERSION_MINOR}.{VERSION_PATCH} {BUILD_TYPE} {VERSION}",
     "ABOUT_TEXT_BUILD_TIMESTAMP"                : "часова мітка збирання:",
     "ABOUT_TEXT_LINE3"                          : "Зауважте, що правила та умови використання комерційного програмного забезпечення розміщенні на <a href=\'{ADOBE_THIRD_PARTY}\'>{ADOBE_THIRD_PARTY}</a> і наводяться тут в якості посилання.",
     "ABOUT_TEXT_LINE4"                          : "Документація та сирці доступні на <a href=\'https://github.com/adobe/brackets/\'>https://github.com/adobe/brackets/</a>",

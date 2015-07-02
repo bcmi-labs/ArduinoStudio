@@ -432,7 +432,7 @@ define({
     "RELAUNCH_CHROME"                      : "Поново покрени Chrome",
     "ABOUT"                                : "О апликацији",
     "CLOSE"                                : "Затвори",
-    "ABOUT_TEXT_LINE1"                     : "Итерација {VERSION_MAJOR}.{VERSION_MINOR} {BUILD_TYPE} {VERSION}",
+    "ABOUT_TEXT_LINE1"                     : "Итерација {VERSION_MAJOR}.{VERSION_MINOR}.{VERSION_PATCH} {BUILD_TYPE} {VERSION}",
     "ABOUT_TEXT_BUILD_TIMESTAMP"           : "временска ознака билда: ",
     "ABOUT_TEXT_LINE3"                     : "Обавештења, обавезе и услови коришћења који се односе на \"third party\" софтвер су лоцирани на <a href='{ADOBE_THIRD_PARTY}'>{ADOBE_THIRD_PARTY}</a> и укључени су овде путем референце.",
     "ABOUT_TEXT_LINE4"                     : "Документација и изворни кôд на <a href='https://github.com/adobe/brackets/'>https://github.com/adobe/brackets/</a>",

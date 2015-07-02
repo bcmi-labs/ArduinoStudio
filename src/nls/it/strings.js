@@ -433,7 +433,7 @@ define({
     "RELAUNCH_CHROME"                   : "Riavvia Google Chrome",
     "ABOUT"                             : "Informazioni",
     "CLOSE"                             : "Chiudi",
-    "ABOUT_TEXT_LINE1"                  : "Release {VERSION_MAJOR}.{VERSION_MINOR} {BUILD_TYPE} {VERSION}",
+    "ABOUT_TEXT_LINE1"                  : "Release {VERSION_MAJOR}.{VERSION_MINOR}.{VERSION_PATCH} {BUILD_TYPE} {VERSION}",
     "ABOUT_TEXT_BUILD_TIMESTAMP"        : "build timestamp: ",
     "ABOUT_TEXT_LINE3"                  : "Avvisi, termini e condizioni circa i software di terze parti raggiungibili all’indirizzo <a href='{ADOBE_THIRD_PARTY}'>{ADOBE_THIRD_PARTY}</a> incorporati come riferimento.",
     "ABOUT_TEXT_LINE4"                  : "Documentazione e codice sorgente sono disponibili all’indirizzo <a href='https://github.com/adobe/brackets/'>https://github.com/adobe/brackets/</a>",
