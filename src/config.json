@@ -27,7 +27,7 @@
     "apiVersion": "0.0.2",
     "homepage": "http://arduino.org",
     "issues": {
-        "url": "http://github.com/adobe/brackets/issues"
+        "url": "http://github.com/arduino-org/ArduinoStudio/issues"
     },
     "repository": {
         "type": "git",
