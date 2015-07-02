@@ -273,7 +273,7 @@ define(function (require, exports, module) {
                     
                     if (!params.get("skipSampleProjectLoad") && !PreferencesManager.getViewState("afterFirstLaunch")) {
                         PreferencesManager.setViewState("afterFirstLaunch", "true");
-			if (ProjectManager.isWelcomeProjectPath(initialProjectPath)) {
+                        if (ProjectManager.isWelcomeProjectPath(initialProjectPath)) {
                             FileSystem.resolve(initialProjectPath.replace(Urls.GETTING_STARTED, '').replace('//', '/') + "blink.ino", function (err, file){                     
                                 if (!err) {
                                     var promise = CommandManager.execute(Commands.CMD_ADD_TO_WORKINGSET_AND_OPEN, { fullPath: file.fullPath });
