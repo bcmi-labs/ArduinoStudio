@@ -53,10 +53,10 @@ define(function (require, exports, module) {
         menu.addMenuItem(Commands.FILE_SAVE_AS);
         //menu.addMenuDivider();
         //menu.addMenuItem(Commands.FILE_LIVE_FILE_PREVIEW);
-        //menu.addMenuItem(Commands.TOGGLE_LIVE_PREVIEW_MB_MODE);
-        //menu.addMenuItem(Commands.FILE_PROJECT_SETTINGS);
-        //menu.addMenuDivider();
-        //menu.addMenuItem(Commands.FILE_EXTENSION_MANAGER);
+        menu.addMenuItem(Commands.TOGGLE_LIVE_PREVIEW_MB_MODE);
+        menu.addMenuItem(Commands.FILE_PROJECT_SETTINGS);
+        menu.addMenuDivider();
+        menu.addMenuItem(Commands.FILE_EXTENSION_MANAGER);
         
         // suppress redundant quit menu item on mac
         if (brackets.platform !== "mac" || !brackets.nativeMenus) {
@@ -185,8 +185,8 @@ define(function (require, exports, module) {
         //    menu.addMenuItem(Commands.HELP_GET_INVOLVED);
         //}
         //
-        //menu.addMenuDivider();
-        //menu.addMenuItem(Commands.HELP_SHOW_EXT_FOLDER);
+        menu.addMenuDivider();
+        menu.addMenuItem(Commands.HELP_SHOW_EXT_FOLDER);
 
         var hasAboutItem = (brackets.platform !== "mac" || !brackets.nativeMenus);
         
