@@ -5,14 +5,14 @@ platform=`uname -s`;
 if [[ "$platform" == 'Linux' ]]; then
    # This is the default directory for Ubuntu installations (if installed with the *.deb).
    # May have to adjust if other operating systems use different directories.
-   default_app_directory='/opt/brackets';
+   default_app_directory='/opt/arduinostudio';
    symlink='dev';
 elif [[ "$platform" == 'Darwin' ]]; then # MAC OSX
-   default_app_directory='/Applications/Brackets.app';
+   default_app_directory='/Applications/ArduinoStudio.app';
    symlink='Contents/dev';
 else
    # Warn for unknown operating system?
-   default_app_directory='/opt/brackets';
+   default_app_directory='/opt/arduinostudio';
    symlink='dev';
 fi
 
