@@ -77,6 +77,18 @@ define(function (require, exports, module) {
 
     /**
      * @type {string}
+     * Constant indicating that this model/view should initialize from the main extension registry with only arduino extensions.
+     */
+    ExtensionManagerViewModel.prototype.SOURCE_ARDUINO = "arduino";
+
+    /**
+     * @type {string}
+     * Constant indicating that this model/view should initialize from the main extension registry with only arduino pltaforms.
+     */
+    ExtensionManagerViewModel.prototype.SOURCE_PLATFORMS = "platforms";
+
+    /**
+     * @type {string}
      * Constant indicating that this model/view should initialize from the list of locally installed extensions.
      */
     ExtensionManagerViewModel.prototype.SOURCE_INSTALLED = "installed";
@@ -333,7 +345,7 @@ define(function (require, exports, module) {
                 // Sort the registry by last published date and store the sorted list of IDs.
                 self.sortedFullSet = registry_utils.sortRegistry(self.extensions, "registryInfo")
                     .filter(function (entry) {
-                        return entry.registryInfo !== undefined && entry.registryInfo.metadata.theme === undefined;
+                        return entry.registryInfo !== undefined && entry.registryInfo.metadata.theme === undefined && entry.registryInfo.metadata.platform === undefined && entry.registryInfo.metadata.arduino === undefined;
                     })
                     .map(function (entry) {
                         return entry.registryInfo.metadata.name;
@@ -503,7 +515,7 @@ define(function (require, exports, module) {
     };
 
     /**
-     * The model for the ExtensionManagerView that is responsible for handling registry-based theme extensions. 
+     * The model for the ExtensionManagerView that is responsible for handling registry-based theme extensions.
      * This extends ExtensionManagerViewModel.
      * Must be disposed with dispose() when done.
      *
@@ -540,7 +552,7 @@ define(function (require, exports, module) {
                 // Sort the registry by last published date and store the sorted list of IDs.
                 self.sortedFullSet = registry_utils.sortRegistry(self.extensions, "registryInfo")
                     .filter(function (entry) {
-                        return entry.registryInfo !== undefined && entry.registryInfo.metadata.theme;
+                        return entry.registryInfo !== undefined && entry.registryInfo.metadata.theme && entry.registryInfo.metadata.platform === undefined && entry.registryInfo.metadata.arduino === undefined;
                     })
                     .map(function (entry) {
                         return entry.registryInfo.metadata.name;
@@ -569,7 +581,149 @@ define(function (require, exports, module) {
         return entry;
     };
 
+    /**
+     * The model for the ExtensionManagerView that is responsible for handling registry-based arduino extensions.
+     * This extends ExtensionManagerViewModel.
+     * Must be disposed with dispose() when done.
+     *
+     * Events:
+     * - change - triggered when the data for a given extension changes. Second parameter is the extension id.
+     * - filter - triggered whenever the filtered set changes (including on initialize).
+     *
+     * @constructor
+     */
+    function ArduinoViewModel() {
+        ExtensionManagerViewModel.call(this);
+    }
+
+    // Inheritance setup
+    ArduinoViewModel.prototype = Object.create(ExtensionManagerViewModel.prototype);
+    ArduinoViewModel.prototype.constructor = ArduinoViewModel;
+
+    /**
+     * @type {string}
+     * ArduinoViewModels always have a source of SOURCE_ARDUINO.
+     */
+    ArduinoViewModel.prototype.source = ExtensionManagerViewModel.prototype.SOURCE_ARDUINO;
+
+    /**
+     * Initializes the model from the remote extension registry.
+     * @return {$.Promise} a promise that's resolved with the registry JSON data.
+     */
+    ArduinoViewModel.prototype._initializeFromSource = function () {
+        var self = this;
+        return ExtensionManager.downloadRegistry()
+            .done(function () {
+                self.extensions = ExtensionManager.extensions;
+
+                // Sort the registry by last published date and store the sorted list of IDs.
+                self.sortedFullSet = registry_utils.sortRegistry(self.extensions, "registryInfo")
+                    .filter(function (entry) {
+                        //return entry.registryInfo !== undefined && entry.registryInfo.metadata.theme;
+                        return entry.registryInfo !== undefined && entry.registryInfo.metadata.theme === undefined && entry.registryInfo.metadata.platform === undefined && entry.registryInfo.metadata.arduino;
+
+                    })
+                    .map(function (entry) {
+                        return entry.registryInfo.metadata.name;
+                    });
+                self._setInitialFilter();
+            })
+            .fail(function () {
+                self.extensions = [];
+                self.sortedFullSet = [];
+                self.filterSet = [];
+            });
+    };
+
+    /**
+     * @private
+     * Finds the arduino extension metadata by id. If there is no arduino extension matching the given id,
+     * this returns `null`.
+     * @param {string} id of the arduino extension
+     * @return {Object?} extension metadata or null if there's no matching extension
+     */
+    ArduinoViewModel.prototype._getEntry = function (id) {
+        var entry = this.extensions[id];
+        if (entry) {
+            return entry.registryInfo;
+        }
+        return entry;
+    };
+
+
+    /**
+     * The model for the ExtensionManagerView that is responsible for handling registry-based platoforms extensions.
+     * This extends ExtensionManagerViewModel.
+     * Must be disposed with dispose() when done.
+     *
+     * Events:
+     * - change - triggered when the data for a given extension changes. Second parameter is the extension id.
+     * - filter - triggered whenever the filtered set changes (including on initialize).
+     *
+     * @constructor
+     */
+    function PlatformsViewModel() {
+        ExtensionManagerViewModel.call(this);
+    }
+
+    // Inheritance setup
+    PlatformsViewModel.prototype = Object.create(ExtensionManagerViewModel.prototype);
+    PlatformsViewModel.prototype.constructor = PlatformsViewModel;
+
+    /**
+     * @type {string}
+     * PlatformsViewModel always have a source of SOURCE_PLATFORMS.
+     */
+    PlatformsViewModel.prototype.source = ExtensionManagerViewModel.prototype.SOURCE_PLATFORMS;
+
+    /**
+     * Initializes the model from the remote extension registry.
+     * @return {$.Promise} a promise that's resolved with the registry JSON data.
+     */
+    PlatformsViewModel.prototype._initializeFromSource = function () {
+        var self = this;
+        return ExtensionManager.downloadRegistry()
+            .done(function () {
+                self.extensions = ExtensionManager.extensions;
+
+                // Sort the registry by last published date and store the sorted list of IDs.
+                self.sortedFullSet = registry_utils.sortRegistry(self.extensions, "registryInfo")
+                    .filter(function (entry) {
+                        //return entry.registryInfo !== undefined && entry.registryInfo.metadata.theme;
+                        return entry.registryInfo !== undefined && entry.registryInfo.metadata.theme === undefined && entry.registryInfo.metadata.platform && entry.registryInfo.metadata.arduino === undefined;
+                    })
+                    .map(function (entry) {
+                        return entry.registryInfo.metadata.name;
+                    });
+                self._setInitialFilter();
+            })
+            .fail(function () {
+                self.extensions = [];
+                self.sortedFullSet = [];
+                self.filterSet = [];
+            });
+    };
+
+    /**
+     * @private
+     * Finds the arduino platform extension metadata by id. If there is no arduino platform extension matching the given id,
+     * this returns `null`.
+     * @param {string} id of the arduino platform extension
+     * @return {Object?} extension metadata or null if there's no matching extension
+     */
+    PlatformsViewModel.prototype._getEntry = function (id) {
+        var entry = this.extensions[id];
+        if (entry) {
+            return entry.registryInfo;
+        }
+        return entry;
+    };
+
+
+
     exports.RegistryViewModel = RegistryViewModel;
     exports.ThemesViewModel = ThemesViewModel;
+    //exports.ArduinoViewModel = ArduinoViewModel;
+    exports.PlatformsViewModel = PlatformsViewModel;
     exports.InstalledViewModel = InstalledViewModel;
 });
