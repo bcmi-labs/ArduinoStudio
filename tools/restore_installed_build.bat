@@ -11,8 +11,8 @@ GOTO Exit
 
 :Error
 ECHO Usage: restore_installed_build.bat application_path
-ECHO Restore Brackets to use the installed HTML/CSS/JS files.
-ECHO Parameters: application_path - path that contains the Brackets application
-ECHO Example: restore_installed_build.bat "c:\Program Files (x86)\Brackets"
+ECHO Restore ArduinoStudio to use the installed HTML/CSS/JS files.
+ECHO Parameters: application_path - path that contains the ArduinoStudio application
+ECHO Example: restore_installed_build.bat "c:\Program Files (x86)\ArduinoStudio"
 
 :Exit

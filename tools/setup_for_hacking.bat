@@ -22,15 +22,15 @@ GOTO Exit
 
 :Error
 ECHO Usage: setup_for_hacking.bat application_path
-ECHO Setup Brackets to use the HTML/CSS/JS files pulled from GitHub.
-ECHO Parameters: application_path - path that contains the Brackets application
-ECHO Example: setup_for_hacking.bat "c:\Program Files (x86)\Brackets"
+ECHO Setup ArduinoStudio to use the HTML/CSS/JS files pulled from GitHub.
+ECHO Parameters: application_path - path that contains the ArduinoStudio application
+ECHO Example: setup_for_hacking.bat "c:\Program Files (x86)\ArduinoStudio"
 GOTO Exit
 
 :XPNotSupported
 ECHO Sorry, this script doesn't run in Windows XP.
 ECHO To enable hacking, use the junction tool (http://technet.microsoft.com/en-us/sysinternals/bb896768)
 ECHO as follows: junction.exe %1\dev "%root_path%"
-ECHO (in the folder containing Brackets.exe)
+ECHO (in the folder containing ArduinoStudio.exe)
 
 :Exit
