@@ -204,22 +204,39 @@ define(function (require, exports, module) {
 
         pendingDownloadRegistry = new $.Deferred();
 
-        $.ajax({
+        var bracketsRegistryRequest = $.ajax({
             url: brackets.config.extension_registry,
             dataType: "json",
             cache: false
-        })
-            .done(function (data) {
-                exports.hasDownloadedRegistry = true;
-                Object.keys(data).forEach(function (id) {
-                    if (!extensions[id]) {
-                        extensions[id] = {};
-                    }
-                    extensions[id].registryInfo = data[id];
-                    synchronizeEntry(id);
-                });
-                exports.trigger("registryDownload");
-                pendingDownloadRegistry.resolve();
+        });
+
+        var arduinoRegistryRequest  = $.ajax({
+            url: brackets.config.extension_arduino_registry,
+            dataType: "json",
+            cache: false
+        });
+
+        $.when(bracketsRegistryRequest, arduinoRegistryRequest)
+            .done(function(res1, res2) {
+                // res1 is the result of request #1, and so on.
+                if( res1[1] !== "success" || res2[1] !== "success"){
+                    pendingDownloadRegistry.reject();
+                }
+                else {
+                    var data = $.extend({}, res1[0], res2[0]);
+                    /*var data = res1;*/
+
+                    exports.hasDownloadedRegistry = true;
+                    Object.keys(data).forEach(function (id) {
+                        if (!extensions[id]) {
+                            extensions[id] = {};
+                        }
+                        extensions[id].registryInfo = data[id];
+                        synchronizeEntry(id);
+                    });
+                    exports.trigger("registryDownload");
+                    pendingDownloadRegistry.resolve();
+                }
             })
             .fail(function () {
                 pendingDownloadRegistry.reject();
@@ -229,9 +246,8 @@ define(function (require, exports, module) {
                 pendingDownloadRegistry = null;
             });
 
-        return pendingDownloadRegistry.promise();
+        return  pendingDownloadRegistry.promise();
     }
-
 
     /**
      * @private
@@ -373,6 +389,17 @@ define(function (require, exports, module) {
      */
     function getExtensionURL(id, version) {
         return StringUtils.format(brackets.config.extension_url, id, version);
+    }
+
+    /**
+     * Given an extension/arduino-platform id and version number, returns the URL for downloading that extension/arduino-platform from
+     * the repository. Does not guarantee that the extension/arduino-platform exists at that URL.
+     * @param {string} id The extension's name from the metadata.
+     * @param {string} version The version to download.
+     * @return {string} The URL to download the extension/arduino-platform from.
+     */
+    function getPlatformURL(id, version) {
+        return StringUtils.format(brackets.config.extension_platform_url, id, version, brackets.platform);
     }
 
     /**
@@ -773,6 +800,7 @@ define(function (require, exports, module) {
     exports.downloadRegistry        = downloadRegistry;
     exports.getCompatibilityInfo    = getCompatibilityInfo;
     exports.getExtensionURL         = getExtensionURL;
+    exports.getPlatformURL          = getPlatformURL;
     exports.remove                  = remove;
     exports.update                  = update;
     exports.extensions              = extensions;

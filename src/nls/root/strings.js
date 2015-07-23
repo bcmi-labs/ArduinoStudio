@@ -555,6 +555,9 @@ define({
     "EXTENSIONS_AVAILABLE_TITLE"           : "Available",
     "EXTENSIONS_THEMES_TITLE"              : "Themes",
     "EXTENSIONS_UPDATES_TITLE"             : "Updates",
+    "EXTENSIONS_BRACKETS_TITLE"            : "Brackets",
+    "EXTENSIONS_ARDUINO_TITLE"             : "Arduino",
+    "EXTENSIONS_PLATFORMS_TITLE"           : "Platforms",
 
     "INLINE_EDITOR_NO_MATCHES"             : "No matches available.",
     "INLINE_EDITOR_HIDDEN_MATCHES"         : "All matches are collapsed. Expand the files listed at right to view matches.",

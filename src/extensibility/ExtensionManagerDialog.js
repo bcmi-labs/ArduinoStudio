@@ -269,13 +269,20 @@ define(function (require, exports, module) {
             views   = [],
             $search,
             $searchClear,
-            context = { Strings: Strings, showRegistry: !!brackets.config.extension_registry },
+            context = { Strings: Strings, showRegistry: !!brackets.config.extension_registry, showArduinoRegistry: !!brackets.config.extension_arduino_registry },
             models  = [];
         
         // Load registry only if the registry URL exists
         if (context.showRegistry) {
             models.push(new ExtensionManagerViewModel.RegistryViewModel());
             models.push(new ExtensionManagerViewModel.ThemesViewModel());
+        }
+
+        //quasto - extension manager branch
+        //Load arduino registry only if the arduino registry URL exists
+        if (context.showArduinoRegistry) {
+            models.push(new ExtensionManagerViewModel.PlatformsViewModel());
+            //models.push(new ExtensionManagerViewModel.ArduinoViewModel());
         }
         
         models.push(new ExtensionManagerViewModel.InstalledViewModel());

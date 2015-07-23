@@ -18,7 +18,9 @@
         "contributors_url"           : "https://api.github.com/repos/adobe/brackets/contributors?per_page={0}&page={1}",
         "extension_listing_url"      : "",
         "extension_registry"         : "https://s3.amazonaws.com/extend.brackets/registry.json",
+        "extension_arduino_registry" : "http://download.arduino.org/studio/extend/registry.json",
         "extension_url"              : "https://s3.amazonaws.com/extend.brackets/{0}/{0}-{1}.zip",
+        "extension_platform_url"     : "http://download.arduino.org/studio/extend/{0}/{0}-{1}-{2}.zip",
         "linting.enabled_by_default" : true,
         "build_timestamp"            : "",
         "healthDataServerURL"        : "https://health.brackets.io/healthDataLog"

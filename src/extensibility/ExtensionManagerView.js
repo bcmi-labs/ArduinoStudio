@@ -261,7 +261,7 @@ define(function (require, exports, module) {
         context.isMarkedForRemoval = ExtensionManager.isMarkedForRemoval(info.metadata.name);
         context.isMarkedForUpdate = ExtensionManager.isMarkedForUpdate(info.metadata.name);
         
-        context.showInstallButton = (this.model.source === this.model.SOURCE_REGISTRY || this.model.source === this.model.SOURCE_THEMES) && !context.updateAvailable;
+        context.showInstallButton = (this.model.source === this.model.SOURCE_REGISTRY || this.model.source === this.model.SOURCE_THEMES || this.model.source === this.model.SOURCE_PLATFORMS || this.model.source === this.model.SOURCE_ARDUINO ) && !context.updateAvailable;
         context.showUpdateButton = context.updateAvailable && !context.isMarkedForUpdate && !context.isMarkedForRemoval;
 
         context.allowInstall = context.isCompatible && !context.isInstalled;
@@ -378,8 +378,15 @@ define(function (require, exports, module) {
         var entry = this.model.extensions[id];
         if (entry && entry.registryInfo) {
             var compatInfo = ExtensionManager.getCompatibilityInfo(entry.registryInfo, brackets.metadata.apiVersion),
+                url = null;
+
+            if (entry.registryInfo.metadata.platform) {
+                url = ExtensionManager.getPlatformURL(id, compatInfo.compatibleVersion);
+            }
+            else {
                 url = ExtensionManager.getExtensionURL(id, compatInfo.compatibleVersion);
-            
+            }
+
             // TODO: this should set .done on the returned promise
             if (_isUpdate) {
                 InstallExtensionDialog.updateUsingDialog(url).done(ExtensionManager.updateFromDownload);
