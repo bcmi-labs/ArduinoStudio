@@ -723,7 +723,7 @@ define(function (require, exports, module) {
 
     exports.RegistryViewModel = RegistryViewModel;
     exports.ThemesViewModel = ThemesViewModel;
-    //exports.ArduinoViewModel = ArduinoViewModel;
+    exports.ArduinoViewModel = ArduinoViewModel;
     exports.PlatformsViewModel = PlatformsViewModel;
     exports.InstalledViewModel = InstalledViewModel;
 });

@@ -282,7 +282,7 @@ define(function (require, exports, module) {
         //Load arduino registry only if the arduino registry URL exists
         if (context.showArduinoRegistry) {
             models.push(new ExtensionManagerViewModel.PlatformsViewModel());
-            //models.push(new ExtensionManagerViewModel.ArduinoViewModel());
+            models.push(new ExtensionManagerViewModel.ArduinoViewModel());
         }
         
         models.push(new ExtensionManagerViewModel.InstalledViewModel());
