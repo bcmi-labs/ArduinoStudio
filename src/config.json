@@ -23,7 +23,7 @@
         "healthDataServerURL": "https://health.brackets.io/healthDataLog"
     },
     "name": "ArduinoStudio",
-    "version": "0.0.2-0",
+    "version": "0.0.3-0",
     "apiVersion": "1.3.0",
     "homepage": "http://arduino.org",
     "issues": {
