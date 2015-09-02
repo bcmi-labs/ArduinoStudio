@@ -3,7 +3,7 @@
         "app_title": "ArduinoStudio",
         "app_name_about": "ArduinoStudio",
         "about_icon": "styles/images/brackets_icon.svg",
-        "update_info_url": "http://s3.amazonaws.com/files.brackets.io/updates/stable/",
+        "update_info_url": "https://raw.githubusercontent.com/arduino-org/ArduinoStudioChangelog/master/",
         "how_to_use_url": "https://github.com/adobe/brackets/wiki/How-to-Use-Brackets",
         "support_url": "https://github.com/adobe/brackets/wiki/Troubleshooting",
         "suggest_feature_url": "https://github.com/adobe/brackets/wiki/Suggest-a-Feature",
