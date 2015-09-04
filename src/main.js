@@ -67,5 +67,6 @@ define(function (require) {
     require(["utils/Compatibility"], function () {
         // Load the brackets module. This is a self-running module that loads and runs the entire application.
         require(["brackets"]);
+        require(["arduino"]);
     });
 });
