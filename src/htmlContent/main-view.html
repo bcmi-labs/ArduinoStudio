@@ -88,29 +88,11 @@
         <div id="main-toolbar" class="toolbar no-focus">
             <!-- Top-aligned buttons -->
             <div class="buttons">
-                <a id='toolbar-arduino-logo' href="{{ARDUINO_WEB_SITE_URL}}" target='_blank' alt="{{ARDUINO_WEB_SITE_TITLE}}"></a>
-                <span id='toolbar-sep1'></span>
-
-                <a id='toolbar-verify-btn' class='toolbar-btn' href='#' title="{{ARDUINO_TOOLBAR_BTN_TLT_BUILD}}"></a>
-                <a id='toolbar-upload-btn' class='toolbar-btn' href='#' title="{{ARDUINO_TOOLBAR_BTN_TLT_UPLOAD}}"></a>
-                <span id='toolbar-sep2'></span>
-
-                <a id='toolbar-new-btn' class='toolbar-btn' href='#' title="{{ARDUINO_TOOLBAR_BTN_TLT_NEW_FILE}}"></a>
-                <a id='toolbar-open-btn' class='toolbar-btn' href='#' title="{{ARDUINO_TOOLBAR_BTN_TLT_OPEN_FILE}}"></a>
-                <a id='toolbar-save-btn' class='toolbar-btn' href='#' title="{{ARDUINO_TOOLBAR_BTN_TLT_SAVE_FILE}}"></a>
-
-                <!--                
-                <a id="toolbar-go-live" href="#"></a> <!-- tooltip for this is set in JS 
+                <a id="toolbar-go-live" href="#"></a> <!-- tooltip for this is set in JS -->
                 <a id="toolbar-extension-manager" title="{{EXTENSION_MANAGER_TITLE}}" href="#"></a>
                 <a id="update-notification" title="{{UPDATE_NOTIFICATION_TOOLTIP}}" href="#" style="display: none"></a>
-                -->
             </div>
-            <div class="bottom-buttons">
-                <a id='toolbar-console-btn' class='toolbar-btn' href='#' title="{{ARDUINO_TOOLBAR_BTN_TLT_CONSOLE}}"></a>
-                <a id='toolbar-serial-btn' class='toolbar-btn' href='#' title="{{ARDUINO_TOOLBAR_BTN_TLT_SERIAL_MONITOR}}"></a>
-                <span id="bottom-sep">&nbsp;</span>
-                <a id="toolbar-toggle-btn" class="toolbar-btn" href='#' title="{{ARDUINO_TOOLBAR_BTN_TLT_SIDEBAR}}"></a>
-            </div>
+            <div class="bottom-buttons"></div>
         </div>
         
         <!-- Hack to ensure that the code editor's web font is loaded early. -->
@@ -126,6 +108,3 @@
         <ul data-dropdown="dropdown"></ul>
     </div>
     <div id="hidden-editors"></div>
-
-    <!-- Include arduino.js - (ex main.js) for toolbar features -->
-    <script type="text/javascript" src="arduino_main.js"></script>    
