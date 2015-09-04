@@ -35,10 +35,34 @@
 define(function (require, exports, module) {
     "use strict";
 
-    var
-        EventDispatcher       = require("utils/EventDispatcher"),
+    var EventDispatcher       = require("utils/EventDispatcher"),
         WorkspaceManager      = require("view/WorkspaceManager"),
+        PreferencesManager    = require("preferences/PreferencesManager"),
+
         consolePanelTemplate  = require("text!htmlContent/console-panel.html");
+
+    var prefs = PreferencesManager.getExtensionPrefs("arduino");
+
+    /**
+     * @const
+     * Name of preferences to use in PreferencesManager.
+     * @type {String}
+     */
+    var CONSOLE_SHOW = "consoleShow";
+
+    /**
+     * @const
+     * Name of preferences to use in PreferencesManager.
+     * @type {String}
+     */
+    var CONSOLE_HEIGHT = "consoleHeight";
+
+    /**
+     * @const
+     * Default height of Console Panel.
+     * @type {number}
+     */
+    var DEFAULT_CONSOLE_HEIGHT = 100;
 
     /**
      * @constructor
@@ -47,14 +71,19 @@ define(function (require, exports, module) {
      * @param {string} panelName The name to use for the panel, as passed to PanelManager.createBottomPanel().
      */
     function ConsoleView(panelName) {
-        var panelHtml  = Mustache.render(consolePanelTemplate, {});//TODO check if need to pass some parameters in mustache.render
+        var panelHtml  = Mustache.render(consolePanelTemplate, {});
 
         this._panel    = WorkspaceManager.createBottomPanel(panelName, $(panelHtml));
         this._$logger  = this._panel.$panel.find("#logger");
         //this._model    = model;
 
-        //TODO check in preferences if console panel should be showed
-        //this._panel.show();
+        if(!prefs.get(CONSOLE_SHOW))
+            this.hide();
+        else
+            this.show();
+
+        this.setHeight( prefs.get(CONSOLE_HEIGHT) || DEFAULT_CONSOLE_HEIGHT );
+
     }
     EventDispatcher.makeEventDispatcher(ConsoleView.prototype);
 
@@ -129,6 +158,21 @@ define(function (require, exports, module) {
             this._$logger.append("[" + new Date().toLocaleString() + "] - <span style='color: darkgreen;'>" + message + "</span><br />");
         }
     };
+
+    /**
+     * Sets height of the Console Panel.
+     *
+     * @param {number} height The height of Console Panel in px
+     */
+    ConsoleView.prototype.setHeight = function (height) {
+        if (this._panel) {
+            this._panel.$panel.css("height", height);
+        }
+    };
+
+
+    //TODO handler to check console resize and save it to the prefs
+
 
     // Public API
     exports.ConsoleView = ConsoleView;

@@ -24,22 +24,17 @@
  * authors: arduino.org team - support@arduino.org
  *
  */
- define(function (require, exports, module) {
+define(function (require, exports, module) {
     "use strict";
 
     var AppInit = require("utils/AppInit"),
-    	Console = require("arduino/Console");
-    
-    
+        PreferencesManager = require("preferences/PreferencesManager");
+
+    require("arduino/Console");
+
+
     AppInit.appReady(function () {
-        console.log("...Console loaded successfully...");
-        /*
-        Console.show();
-        for(var i=0; i<=250; i++){
-	        Console.logInfo("Ciao biddazzu!!!");
-	        Console.logError("Attento biddazzu!!!");
-	        Console.logSuccess("Ok biddazzu!!!");
-    	}
-    	*/
+        PreferencesManager.definePreference("arduino.consoleShow", "boolean", true);
+        PreferencesManager.definePreference("arduino.consoleHeight", "number", 195);
     });
 });
