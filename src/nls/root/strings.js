@@ -648,5 +648,161 @@ define({
     "COLLAPSE_ALL"                  : "Collapse All",
     "EXPAND_ALL"                    : "Expand All",
     "COLLAPSE_CURRENT"              : "Collapse Current",
-    "EXPAND_CURRENT"                : "Expand Current"
+    "EXPAND_CURRENT"                : "Expand Current",
+
+    //Arduino Root Localization
+    
+    // MENU > SKETCH
+    "ARDUINO_MENU_SKETCH_TITLE"                                 : "Sketch",
+    "ARDUINO_MENU_SKETCH_ITEM_BUILD"                            : "Verify / Compile",
+    "ARDUINO_MENU_SKETCH_ITEM_ADD_FILE"                         : "Add file",
+    "ARDUINO_MENU_SKETCH_ITEM_IMPORT_LIB"                       : "Import library",
+    "ARDUINO_MENU_SKETCH_ITEM_SHOW_FOLDER"                      : "Show sketch folder",
+
+    // MENU > TOOLS
+    "ARDUINO_MENU_TOOLS_TITLE"                                  : "Tools",
+    "ARDUINO_MENU_TOOLS_ITEM_AUTO_FORMATTING"                   : "Autoformatting",
+    "ARDUINO_MENU_TOOLS_ITEM_STORE_SKETCH"                      : "Store sketch",
+    "ARDUINO_MENU_TOOLS_ITEM_SERIAL_MONITOR"                    : "Serial monitor",
+    "ARDUINO_MENU_TOOLS_ITEM_BOARD"                             : "Board",
+    "ARDUINO_MENU_TOOLS_ITEM_PORT"                              : "Port",
+    "ARDUINO_MENU_TOOLS_ITEM_PROGRAMMER"                        : "Programmer",
+    "ARDUINO_MENU_TOOLS_ITEM_BURN_BOOTLOADER"                   : "Burn bootloader",
+    
+    // MENU > EDIT               
+    "ARDUINO_MENU_EDIT_TITLE"                                   : "Edit",
+    "ARDUINO_MENU_EDIT_ITEM_COPY_FORUM"                         : "Copy for forum",
+    "ARDUINO_MENU_EDIT_ITEM_COPY_HTML"                          : "Copy as HTML",
+    "ARDUINO_MENU_EDIT_ITED_FIND_SELECTED"                      : "Find selected text",
+    
+    // MENU > FILE                   
+    "ARDUINO_MENU_FILE_TITLE"                                   : "File",
+    "ARDUINO_MENU_FILE_ITEM_OPEN_SAMPLES"                       : "Open samples",
+    "ARDUINO_MENU_FILE_ITEM_UPLOAD"                             : "Upload",
+    "ARDUINO_MENU_FILE_ITEM_UPLOAD_USE_PROGR"                   : "Upload using programmer",
+    "ARDUINO_MENU_FILE_ITEM_PRINT_PAGE_SETTING"                 : "Print page settings",
+    "ARDUINO_MENU_FILE_ITEM_PRINT"                              : "Print",
+    "ARDUINO_MENU_FILE_ITEM_PREFERENCES"                        : "Preferences",
+    
+    // MENU > HELP
+    "ARDUINO_MENU_HELP_TITLE"                                   : "Help",
+    "ARDUINO_MENU_HELP_ITEM_DRIVER"                             : "Install Arduino driver",
+    "ARDUINO_MENU_HELP_ITEM_ABOUT"                              : "About Arduino",
+    
+    // TOOLBAR
+    "ARDUINO_TOOLBAR_BTN_TLT_BUILD"                             : "Verify",
+    "ARDUINO_TOOLBAR_BTN_TLT_UPLOAD"                            : "Upload",
+    "ARDUINO_TOOLBAR_BTN_TLT_NEW_FILE"                          : "New",
+    "ARDUINO_TOOLBAR_BTN_TLT_SAVE_FILE"                         : "Save",
+    "ARDUINO_TOOLBAR_BTN_TLT_OPEN_FILE"                         : "Open",
+    "ARDUINO_TOOLBAR_BTN_TLT_CONSOLE"                           : "Console",
+    "ARDUINO_TOOLBAR_BTN_TLT_SERIAL_MONITOR"                    : "Serial monitor",
+    "ARDUINO_TOOLBAR_BTN_TLT_SIDEBAR"                           : "Show/Hide Sidebar",
+    
+    // STATUS BAR
+    "ARDUINO_STATUS_BAR_DEF_LBL_PORT"                           : "Select port",
+    "ARDUINO_STATUS_BAR_DEF_LBL_BOARD"                          : "Select board",
+    
+    // PANEL > SERIAL_MONITOR   
+    "ARDUINO_PANEL_SERIAL_MONITOR_TITLE"                        : "Serial Monitor",
+    "ARDUINO_PANEL_SERIAL_MONITOR_LBL_AUTOSCROLL"               : "Autoscroll",
+    "ARDUINO_PANEL_SERIAL_MONITOR_LBL_BAUD_RATE"                : "Baud Rate",
+    "ARDUINO_PANEL_SERIAL_MONITOR_LBL_EOL"                      : "End Of Line",
+    "ARDUINO_PANEL_SERIAL_MONITOR_LBL_MESSAGE"                  : "Message",
+    "ARDUINO_PANEL_SERIAL_MONITOR_LBL_LOG"                      : "Log",
+    "ARDUINO_PANEL_SERIAL_MONITOR_BTN_TLT_SEND_MESSAGE"         : "Send messagge",
+    "ARDUINO_PANEL_SERIAL_MONITOR_BTN_TLT_CLEAR"                : "Clear all",
+    "ARDUINO_PANEL_SERIAL_MONITOR_OPT_DEFAULT_BAUD_RATE"        : "Select Baud Rate",
+    "ARDUINO_PANEL_SERIAL_MONITOR_OPT_DEFAULT_EOL"              : "Select End Of Line char",
+    "ARDUINO_PANEL_SERIAL_MONITOR_EOL_NA"                       : "No line ending",
+    "ARDUINO_PANEL_SERIAL_MONITOR_EOL_NL"                       : "New Line (NL)",
+    "ARDUINO_PANEL_SERIAL_MONITOR_EOL_CR"                       : "Carriage (CR)",
+    "ARDUINO_PANEL_SERIAL_MONITOR_EOL_NLCR"                     : "Both (NL &amp; CR)",
+                
+    // PANEL > CONSOLE
+    "ARDUINO_PANEL_CONSOLE_TITLE"                               : "Console",
+
+    // PANEL > DOCS
+    "ARDUINO_PANEL_DOCS_PARAMETERS"                             : "Parameters",
+    "ARDUINO_PANEL_DOCS_EXAMPLES"                               : "Examples",
+    "ARDUINO_PANEL_DOCS_SYNTAX"                                 : "Syntax",
+    "ARDUINO_PANEL_DOCS_RETURNS"                                : "Returns",
+    "ARDUINO_PANEL_DOCS_SEEALSO"                                : "See also",
+           
+
+    "ARDUINO_DIALOG_LATEST_TITLE"                               : "Get the latest version",
+    "ARDUINO_DIALOG_LATEST_LBL_DOWNLOAD_IT"                     : "Download from",
+    "ARDUINO_DIALOG_LATEST_LBL_DOWNLOAD_HERE"                   : "here",
+    "ARDUINO_DIALOG_LATEST_LBL_CHANGELOG"                       : "Changelog",
+    "ARDUINO_DIALOG_LATEST_LBL_UPTODATE"                        : "Your version is up to date",
+
+    "ARDUINO_DIALOG_PORT_TITLE"                                 : "Select port",
+    "ARDUINO_DIALOG_PORT_LBL_SELECT"                            : "Select your port",
+    "ARDUINO_DIALOG_PORT_OPT_DEFAULT"                           : "No port selected...",
+    "ARDUINO_DIALOG_PORT_OPT_SERIAL"                            : "Serial ports",
+    "ARDUINO_DIALOG_PORT_OPT_NETWORK"                           : "Network ports",
+     
+    "ARDUINO_BOARD_DIALOG_BOARD_TITLE"                          : "Select board",
+    "ARDUINO_BOARD_DIALOG_BOARD_LBL_SELECT"                     : "Select your board",
+    "ARDUINO_BOARD_DIALOG_BOARD_OPT_DEFAULT"                    : "No board selected",
+
+    "ARDUINO_DIALOG_PROGRAMMER_TITLE"                           : "Select programmer",
+    "ARDUINO_DIALOG_PROGRAMMER_LBL_SELECT"                      : "Select your programmer",
+    "ARDUINO_DIALOG_PROGRAMMER_OPT_DEFAULT"                     : "No programmer selected...",
+
+
+    "ARDUINO_DIALOG_ABOUT_TITLE"                                : "Arduino!",
+    "ARDUINO_DIALOG_IMPORT_LIBRARIES": {
+    "ARDUINO_DIALOG_IMPORT_LIBRARIES_TITLE"                     : "Import libraries",
+    "ARDUINO_DIALOG_IMPORT_LIBRARIES_BTN_FOLDER"                : "Import folder",
+    "ARDUINO_DIALOG_IMPORT_LIBRARIES_BTN_ARCHIVE"               : "Import zip archive",
+    "ARDUINO_DIALOG_IMPORT_LIBRARIES_LBL_IMPORTED"              : "Imported Libraries",
+    "ARDUINO_DIALOG_IMPORT_LIBRARIES_TH_NAME"                   : "Name",
+    "ARDUINO_DIALOG_IMPORT_LIBRARIES_TH_ADD"                    : "Add",
+            
+    "ARDUINO_DIALOG_PREFERENCE_TITLE"                           : "Preferences",
+    "ARDUINO_DIALOG_PREFERENCE_LBL_SKETCHBOOK_PATH"             : "Sketchbook path",
+    "ARDUINO_DIALOG_PREFERENCE_LBL_VERBOSE_OUTPUT"              : "Show verbose output during",
+    "ARDUINO_DIALOG_PREFERENCE_LBL_BUILD"                       : "Building",
+    "ARDUINO_DIALOG_PREFERENCE_LBL_UPLOAD"                      : "Upload",
+    "ARDUINO_DIALOG_PREFERENCE_LBL_FONT_SIZE"                   : "Editor font size",
+    "ARDUINO_DIALOG_PREFERENCE_LBL_CHECK_UPDATE"                : "Check for update at startup",
+    "ARDUINO_DIALOG_PREFERENCE_BTN_SKETCHBOOK_BROWSE"           : "Browse",
+
+    "ARDUINO_DIALOG_GENERIC_TITLE_SELECT_FILE"                  : "Select file",
+    "ARDUINO_DIALOG_GENERIC_TITLE_SELECT_FOLDER"                : "Select folder",
+      
+    // WEB
+    "ARDUINO_WEB_SITE_TITLE"                                    : "Arduino Web Site",
+    "ARDUINO_WEB_SITE_URL"                                      : "http://arduino.org",
+    "ARDUINO_WEB_NAME"                                          : "arduino.org",
+
+    "ARDUINO_WEB_LABS_TITLE"                                    : "Arduino Labs",
+    "ARDUINO_WEB_LABS_URL"                                      : "http://labs.arduino.org",
+    "ARDUINO_WEB_LABS_NAME"                                     : "labs.arduino.org",
+
+    "ARDUINO_WEB_TWITTER_TITLE"                                 : "Twitter",
+    "ARDUINO_WEB_TWITTER_NAME"                                  : "ArduinoOrg",
+    "ARDUINO_WEB_TWITTER_URL"                                   : "https://twitter.com/ArduinoOrg",
+
+    "ARDUINO_WEB_FACEBOOK_TITLE"                                : "Facebook",
+    "ARDUINO_WEB_FACEBOOK_NAME"                                 : "arduino.org",
+    "ARDUINO_WEB_FACEBOOK_URL"                                  : "https://www.facebook.com/arduino.org",
+
+
+    "ARDUINO_WEB_GITHUB_TITLE"                                  : "GitHub",
+    "ARDUINO_WEB_GITHUB_NAME"                                   : "arduino-org",
+    "ARDUINO_WEB_GITHUB_URL"                                    : "http://github.com/arduino-org"
+        
+    // MESSAGE  
+    "ARDUINO_MESSAGE_OK"                                        : "Ok",
+    "ARDUINO_MESSAGE_CANCEL"                                    : "Cancel",
+    "ARDUINO_MESSAGE_SUCCESS_LOAD"                              : "Loading successfull",
+    "ARDUINO_MESSAGE_ERROR_LOAD"                                : "Loading error",
+        
+
+    // EXTRAS
+    "ARDUINO_EXTRAS_COMING_SOON"         : "Coming soon",
+    "ARDUINO_EXTRAS_WIP"                 : "Work in progress",
+    "ARDUINO_EXTRAS_SOURCE"              : "Source code"
 });
