@@ -85,6 +85,7 @@ define(function (require, exports, module) {
     ConsoleView.prototype.show = function () {
         if(this._panel && !this._panel.isVisible()){
             this._panel.show();
+            prefs.set(CONSOLE_SHOW, true);
             this.trigger("show");
         }
     };
@@ -95,9 +96,36 @@ define(function (require, exports, module) {
     ConsoleView.prototype.hide = function () {
         if (this._panel && this._panel.isVisible()) {
             this._panel.hide();
+            prefs.set(CONSOLE_SHOW, false);
             this.trigger("hide");
         }
     };
+
+    /**
+     * Says if the Console Panel is visible.
+     * @return {boolean}
+     */
+    ConsoleView.prototype.isVisible = function () {
+        if (this._panel && this._panel.isVisible()) {
+            return true;
+        }
+        else{
+            return false;
+        }
+    };
+
+    /**
+     * Changes status visible/not-visible of the Console Panel.
+     */
+    ConsoleView.prototype.toggle = function () {
+        if (this._panel && this._panel.isVisible()) {
+            this.hide();
+        }
+        else{
+            this.show();
+        }
+    };
+
 
     /**
      * Clears the Console Log panel.

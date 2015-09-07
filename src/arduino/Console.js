@@ -33,11 +33,13 @@ define(function (require, exports, module) {
 
     // Load dependent modules
     var AppInit           = require("utils/AppInit"),
+        PreferencesManager  = require("preferences/PreferencesManager"),
         ConsoleView       = require("arduino/ConsoleView").ConsoleView;
 
     // make sure the global brackets variable is loaded
     require("utils/Global");
 
+    PreferencesManager.definePreference("arduino.consoleShow", "boolean", true);
 
     /** @type {ConsoleView} The console view. Initialized in htmlReady() */
     var _consoleView = null;
@@ -54,6 +56,20 @@ define(function (require, exports, module) {
      */
     function show() {
         _consoleView.show();
+    }
+
+    /**
+     * Says if the Console Panel is visible
+     */
+    function isVisible() {
+        return _consoleView.isVisible();
+    }
+
+    /**
+     * Says if the Console Panel is visible
+     */
+    function toggle() {
+        _consoleView.toggle();
     }
 
     /**
@@ -114,6 +130,8 @@ define(function (require, exports, module) {
     // Define public API
     exports.show = show;
     exports.hide = hide;
+    exports.isVisible = isVisible;
+    exports.toggle = toggle;
     exports.clear = clear;
     exports.logInfo = logInfo;
     exports.logError = logError;

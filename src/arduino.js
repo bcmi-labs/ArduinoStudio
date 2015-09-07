@@ -28,12 +28,60 @@ define(function (require, exports, module) {
     "use strict";
 
     var AppInit = require("utils/AppInit"),
-        PreferencesManager = require("preferences/PreferencesManager");
-
-    require("arduino/Console");
-
-
-    AppInit.appReady(function () {
-        PreferencesManager.definePreference("arduino.consoleShow", "boolean", true);
+    	Console = require("arduino/Console"),
+    	PreferencesManager = require("preferences/PreferencesManager");
+	
+    AppInit.appReady(function () {    	
+    	$('.toolbar-btn').click(function(evt){
+			evt.preventDefault();
+			toolbarHandler(this.id);
+		});
     });
+
+    
+
+	function toolbarHandler(btnid){
+        switch(btnid) {
+            /*
+            case 'toolbar-verify-btn':
+                CommandManager.execute(Commands.FILE_SAVE);
+                Dispatcher.trigger("arduino-event-console-clear");
+                Dispatcher.trigger('arduino-event-build');
+                break;
+            case 'toolbar-upload-btn':
+                CommandManager.execute(Commands.FILE_SAVE);
+                Dispatcher.trigger("arduino-event-console-clear");
+                Dispatcher.trigger('arduino-event-upload');
+                break;
+            case 'toolbar-new-btn':
+                CommandManager.execute(Commands.FILE_NEW);
+                break;
+            case 'toolbar-open-btn':
+                CommandManager.execute(Commands.FILE_OPEN);
+                break;
+            case 'toolbar-save-btn':
+                CommandManager.execute(Commands.FILE_SAVE);
+                break;
+            case 'toolbar-serial-btn':
+                Dispatcher.trigger('arduino-event-serialmonitor');
+                break;
+            */
+            case 'toolbar-console-btn':
+                Console.toggle();
+                console.log(Console.isDisplay());
+                break;
+            case 'toolbar-toggle-btn':
+                if($('#sidebar').is(':visible')){
+                    $('#sidebar').hide();
+                    $('.main-view .content').css('right', '0px');
+                }
+                else{
+                    $('.main-view .content').css('right', '200px');
+                    $('#sidebar').show();
+                }
+                break;
+            default:
+                //console.log(btnid+' clicked');
+        }
+    }
 });
