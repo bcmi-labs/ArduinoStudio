@@ -170,6 +170,8 @@ define(function (require, exports, module) {
         }
     };
 
+    //TODO: add register command for console panel
+
     // Public API
     exports.ConsoleView = ConsoleView;
 });
