@@ -35,6 +35,5 @@ define(function (require, exports, module) {
 
     AppInit.appReady(function () {
         PreferencesManager.definePreference("arduino.consoleShow", "boolean", true);
-        PreferencesManager.definePreference("arduino.consoleHeight", "number", 195);
     });
 });

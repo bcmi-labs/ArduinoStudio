@@ -51,20 +51,6 @@ define(function (require, exports, module) {
     var CONSOLE_SHOW = "consoleShow";
 
     /**
-     * @const
-     * Name of preferences to use in PreferencesManager.
-     * @type {String}
-     */
-    var CONSOLE_HEIGHT = "consoleHeight";
-
-    /**
-     * @const
-     * Default height of Console Panel.
-     * @type {number}
-     */
-    var DEFAULT_CONSOLE_HEIGHT = 100;
-
-    /**
      * @constructor
      * Handles the Console panel.
      *
@@ -75,16 +61,13 @@ define(function (require, exports, module) {
 
         this._panel    = WorkspaceManager.createBottomPanel(panelName, $(panelHtml));
         this._$logger  = this._panel.$panel.find("#logger");
-        //this._model    = model;
 
         if(!prefs.get(CONSOLE_SHOW))
             this.hide();
         else
             this.show();
-
-        this.setHeight( prefs.get(CONSOLE_HEIGHT) || DEFAULT_CONSOLE_HEIGHT );
-
     }
+
     EventDispatcher.makeEventDispatcher(ConsoleView.prototype);
 
     /** @type {ConsoleModel} The Console model we're viewing. */
@@ -158,21 +141,6 @@ define(function (require, exports, module) {
             this._$logger.append("[" + new Date().toLocaleString() + "] - <span style='color: darkgreen;'>" + message + "</span><br />");
         }
     };
-
-    /**
-     * Sets height of the Console Panel.
-     *
-     * @param {number} height The height of Console Panel in px
-     */
-    ConsoleView.prototype.setHeight = function (height) {
-        if (this._panel) {
-            this._panel.$panel.css("height", height);
-        }
-    };
-
-
-    //TODO handler to check console resize and save it to the prefs
-
 
     // Public API
     exports.ConsoleView = ConsoleView;
