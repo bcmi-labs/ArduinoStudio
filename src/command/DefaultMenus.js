@@ -166,7 +166,7 @@ define(function (require, exports, module) {
         menu = Menus.addMenu(Strings.HELP_MENU, Menus.AppMenuBar.HELP_MENU);
 
         // TODO: enable with correct pages and urls to arduino.org
-        //menu.addMenuItem(Commands.HELP_CHECK_FOR_UPDATE);
+        menu.addMenuItem(Commands.HELP_CHECK_FOR_UPDATE);
         //
         //menu.addMenuDivider();
         //if (brackets.config.how_to_use_url) {

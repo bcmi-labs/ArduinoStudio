@@ -1,10 +1,16 @@
 {{#.}}
 <div>
-    <h3>{{versionString}} - {{dateString}} (<a href="{{releaseNotesURL}}" title="{{releaseNotesURL}}">{{Strings.RELEASE_NOTES}}</a>)</h3>
+    <h4>{{versionString}} {{releaseLifeCycle}} - {{dateString}} <!--(<a href="{{releaseNotesURLh3" title="{{releaseNotesURL}}">{{Strings.RELEASE_NOTES}}</a>)--></h4>
+    <!--<h5><a href="{{sourceCode}}" title="{{Strings.UPDATE_GET_SOURCE_CODE}}">{{Strings.UPDATE_GET_SOURCE_CODE}}</a></h5>-->
     <ul>
-        {{#newFeatures}}
-        <li><b>{{name}}</b> - {{description}}</li>
-        {{/newFeatures}}
+        {{#changeLog}}
+        <li><b>{{group}}</b></li>
+            <ul>
+                {{#features}}
+                <li><i>{{name}}</i> - {{description}}</li>
+                {{/features}}
+            </ul>
+        {{/changeLog}}
     </ul>
 </div>
 {{/.}}
