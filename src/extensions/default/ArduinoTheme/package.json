@@ -1,0 +1,13 @@
+{
+    "title": "Arduino Theme (Default)",
+    "name": "arduino-theme",
+    "description": "Built-in light theme for Arduino Studio",
+    "version": "0.42.0",
+    "author": "Arduino.org Team <support@arduino.org>",
+    "engines": {
+        "brackets": ">=0.42.0"
+    },
+    "theme": {
+        "file": "main.less"
+    }
+}

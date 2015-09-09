@@ -46,7 +46,7 @@ define(function (require, exports, module) {
      */
     var defaults = {
         "themeScrollbars": true,
-        "theme": "light-theme"
+        "theme": "arduino-theme"
     };
 
 
