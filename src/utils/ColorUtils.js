@@ -67,8 +67,23 @@ define(function (require, exports, module) {
     }
 
 
+    /*
+     * Convert JQuery RGB Color to HEX format.
+     *
+     * @param {string} orig - rgb format color in the form of "rgb(0, 0, 0)"
+     * @return {string} hex - hex format of rgb color "#000000"
+     */
+    function rgbToHex(rgb){
+        var color = rgb.replace(/\s/g,'').match(/^rgba?\((\d+),(\d+),(\d+)/i);
+        return (color && color.length === 4) ? "#" +
+        ("0" + parseInt(color[1],10).toString(16)).slice(-2) +
+        ("0" + parseInt(color[2],10).toString(16)).slice(-2) +
+        ("0" + parseInt(color[3],10).toString(16)).slice(-2) : rgb;
+    }
+
     // Define public API
     exports.COLOR_NAMES     = COLOR_NAMES;
     exports.COLOR_REGEX     = COLOR_REGEX;
     exports.formatColorHint = formatColorHint;
+    exports.rgbToHex        = rgbToHex;
 });

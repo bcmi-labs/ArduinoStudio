@@ -38,6 +38,8 @@ define(function (require, exports, module) {
     var EventDispatcher       = require("utils/EventDispatcher"),
         WorkspaceManager      = require("view/WorkspaceManager"),
         PreferencesManager    = require("preferences/PreferencesManager"),
+        ThemeManager          = require("view/ThemeManager"),
+        ColorUtils            = require("utils/ColorUtils"),
 
         consolePanelTemplate  = require("text!htmlContent/console-panel.html");
 
@@ -62,11 +64,20 @@ define(function (require, exports, module) {
         this._panel    = WorkspaceManager.createBottomPanel(panelName, $(panelHtml));
         this._$logger  = this._panel.$panel.find("#logger");
 
+
         if(!prefs.get(CONSOLE_SHOW))
             this.hide();
         else
             this.show();
+
+        _changeBackground();
+
     }
+
+    ThemeManager.on("themeChange", function(evt){
+        var theme = evt.target; //Theme Object
+        _changeBackground();
+    });
 
     EventDispatcher.makeEventDispatcher(ConsoleView.prototype);
 
@@ -169,6 +180,15 @@ define(function (require, exports, module) {
             this._$logger.append("[" + new Date().toLocaleString() + "] - <span style='color: darkgreen;'>" + message + "</span><br />");
         }
     };
+
+    /**
+     * Update the background color of the Console, matching Editor background color.
+     */
+    function _changeBackground(){
+        var rgbJQBGColor =  $(".not-editor").css("background-color") ;
+        var hexBGColor = ColorUtils.rgbToHex(rgbJQBGColor);
+        $("#logger").css("background-color", hexBGColor);
+    }
 
     //TODO: add register command for console panel
 
