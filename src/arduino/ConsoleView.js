@@ -70,14 +70,14 @@ define(function (require, exports, module) {
         else
             this.show();
 
-        _changeBackground();
+        //_changeBackground();
 
     }
 
-    ThemeManager.on("themeChange", function(evt){
+    /*ThemeManager.on("themeChange", function(evt){
         var theme = evt.target; //Theme Object
         _changeBackground();
-    });
+    });*/
 
     EventDispatcher.makeEventDispatcher(ConsoleView.prototype);
 
@@ -184,11 +184,11 @@ define(function (require, exports, module) {
     /**
      * Update the background color of the Console, matching Editor background color.
      */
-    function _changeBackground(){
-        var rgbJQBGColor =  $(".not-editor").css("background-color") ;
-        var hexBGColor = ColorUtils.rgbToHex(rgbJQBGColor);
-        $("#logger").css("background-color", hexBGColor);
-    }
+    /*function _changeBackground(){
+        //var rgbJQBGColor =  $(".modal-body").css("background-color") ;
+        //var hexBGColor = ColorUtils.rgbToHex(rgbJQBGColor);
+        //$("#logger").css("background-color", hexBGColor);
+    }*/
 
     //TODO: add register command for console panel
 
