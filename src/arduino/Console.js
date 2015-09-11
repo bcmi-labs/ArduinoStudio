@@ -32,14 +32,39 @@ define(function (require, exports, module) {
     "use strict";
 
     // Load dependent modules
-    var AppInit           = require("utils/AppInit"),
+    var AppInit             = require("utils/AppInit"),
+        EventDispatcher     = require("utils/EventDispatcher"),
         PreferencesManager  = require("preferences/PreferencesManager"),
-        ConsoleView       = require("arduino/ConsoleView").ConsoleView;
+        Commands            = require("command/Commands"),
+        CommandManager      = require("command/CommandManager"),
+        Strings             = require("strings"),
+        ConsoleView         = require("arduino/ConsoleView").ConsoleView;
 
     // make sure the global brackets variable is loaded
     require("utils/Global");
 
     PreferencesManager.definePreference("arduino.consoleShow", "boolean", true);
+
+    EventDispatcher.makeEventDispatcher(exports);
+
+    var LOG_TYPE = {
+        ERROR:      "logType.Error",
+        INFO:       "logType.Info",
+        SUCESS:     "logType.Success"
+    };
+
+    /**
+     * @constructor
+     * logMessage is the object used to rapresents log into the console, it's also triggered trough core api .
+     *
+     * @param {string} message Message to log.
+     * @param {LOG_TYPE} type Log type: info, success, error
+     */
+    function Message(message, type){
+        this.message = message;
+        this.type = type || LOG_TYPE.INFO;
+        this.timestamp = new Date().toLocaleString();
+    }
 
     /** @type {ConsoleView} The console view. Initialized in htmlReady() */
     var _consoleView = null;
@@ -86,7 +111,8 @@ define(function (require, exports, module) {
      */
     function logInfo(data) {
         if(data) {
-            _consoleView.logInfo(JSON.stringify(data));
+            var msg = new Message(data, LOG_TYPE.INFO);
+            _consoleView.log(msg);
         }
     }
 
@@ -97,7 +123,8 @@ define(function (require, exports, module) {
      */
     function logError(data) {
         if(data) {
-            _consoleView.logError(JSON.stringify(data));
+            var msg = new Message(data, LOG_TYPE.ERROR);
+            _consoleView.log(msg);
         }
     }
 
@@ -108,24 +135,33 @@ define(function (require, exports, module) {
      */
     function logSuccess(data) {
         if(data) {
-            _consoleView.logSuccess(JSON.stringify(data));
+            var msg = new Message(data, LOG_TYPE.SUCCESS);
+            _consoleView.log(msg);
         }
     }
 
     AppInit.htmlReady(function () {
-        //TODO set names
         _consoleView = new ConsoleView("arduino-console");
-        /*        var model = FindInFiles.searchModel;
-                _resultsView = new SearchResultsView(model, "find-in-files-results", "find-in-files.results");
-                _resultsView
-                    .on("replaceAll", function () {
-                        _finishReplaceAll(model);
-                    })
-                    .on("close", function () {
-                        FindInFiles.clearSearch();
-                    });*/
+        _consoleView.on("hide", function(){
+            exports.trigger("hide");
+        });
+        _consoleView.on("show", function(){
+            exports.trigger("show");
+        });
+        _consoleView.on("clear", function(){
+            exports.trigger("clear");
+        });
+        _consoleView.on("log", function(evt, msg){
+            exports.trigger("log", msg);
+        });
     });
 
+    CommandManager.register(Strings.CMD_CONSOLE_TOOGLE, Commands.TOOLS_CONSOLE_TOOGLE, toggle);
+
+
+/*    AppInit.appReady(function () {
+        $("#toolbar-console-btn").click( toggle );
+    });*/
 
     // Define public API
     exports.show = show;

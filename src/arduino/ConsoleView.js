@@ -38,8 +38,7 @@ define(function (require, exports, module) {
     var EventDispatcher       = require("utils/EventDispatcher"),
         WorkspaceManager      = require("view/WorkspaceManager"),
         PreferencesManager    = require("preferences/PreferencesManager"),
-        ThemeManager          = require("view/ThemeManager"),
-        ColorUtils            = require("utils/ColorUtils"),
+        Console               = require("arduino/Console"),
 
         consolePanelTemplate  = require("text!htmlContent/console-panel.html");
 
@@ -65,10 +64,12 @@ define(function (require, exports, module) {
         this._$logger  = this._panel.$panel.find("#logger");
 
 
-        if(!prefs.get(CONSOLE_SHOW))
+        if(!prefs.get(CONSOLE_SHOW)) {
             this.hide();
-        else
+        }
+        else {
             this.show();
+        }
 
         //_changeBackground();
 
@@ -189,6 +190,30 @@ define(function (require, exports, module) {
         //var hexBGColor = ColorUtils.rgbToHex(rgbJQBGColor);
         //$("#logger").css("background-color", hexBGColor);
     }*/
+
+    /**
+     * Appends Success/OK log messages into the Console.
+     *
+     * @param {logMessage} msg The msg to log on Console.
+     */
+    ConsoleView.prototype.log = function (msg) {
+        if (this._panel && this._$logger && msg) {
+            switch (msg.type){
+            case Console.LOG_TYPE.INFO:
+                this._$logger.append("[" + msg.timestamp + "] - <span style='color: black;'>" + msg.message + "</span><br />");
+                break;
+            case Console.LOG_TYPE.ERROR:
+                this._$logger.append("[" + msg.timestamp + "] - <span style='color: darkred;'>" + msg.message + "</span><br />");
+                break;
+            case Console.LOG_TYPE.SUCCESS:
+                this._$logger.append("[" + msg.timestamp + "] - <span style='color: darkgreen;'>" + msg.message + "</span><br />");
+                break;
+            }
+            this.trigger("log", msg);
+        }
+    };
+
+
 
     //TODO: add register command for console panel
 

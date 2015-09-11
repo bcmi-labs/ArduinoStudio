@@ -169,6 +169,9 @@ define(function (require, exports, module) {
     
     // ADD_TO_WORKING_SET is deprectated but we need a handler for it because the new command doesn't return the same result as the legacy command
     exports.FILE_ADD_TO_WORKING_SET     = "file.addToWorkingSet";       // Deprecated through DocumentCommandHandlers.js handleFileAddToWorkingSet
+
+    // TOOLS
+    exports.TOOLS_CONSOLE_TOOGLE          = "tools.consoleToogle";       // Console.js       toggle();
     
     // DEPRECATED: Working Set Commands
     DeprecationWarning.deprecateConstant(exports, "SORT_WORKINGSET_BY_ADDED",   "CMD_WORKINGSET_SORT_BY_ADDED");

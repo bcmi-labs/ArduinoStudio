@@ -28,20 +28,26 @@ define(function (require, exports, module) {
     "use strict";
 
     var AppInit = require("utils/AppInit"),
-    	Console = require("arduino/Console"),
-    	PreferencesManager = require("preferences/PreferencesManager");
+        //Console = require("arduino/Console"),
+        CommandManager = require("command/CommandManager"),
+        Commands = require("command/Commands");
+        //PreferencesManager = require("preferences/PreferencesManager");
 	
-    AppInit.appReady(function () {    	
-    	$('.toolbar-btn').click(function(evt){
-			evt.preventDefault();
-			toolbarHandler(this.id);
+    AppInit.appReady(function () {
+        $('.toolbar-btn').click(function(evt){
+            evt.preventDefault();
+            toolbarHandler(this.id);
 		});
     });
 
-    
-
-	function toolbarHandler(btnid){
-        switch(btnid) {
+    /**
+     * Handle clicks event on toolbar buttons
+     *
+     * @param {String} btnId DOM Id of clicked button
+     *
+     */
+	function toolbarHandler(btnId){
+        switch(btnId) {
             /*
             case 'toolbar-verify-btn':
                 CommandManager.execute(Commands.FILE_SAVE);
@@ -66,22 +72,21 @@ define(function (require, exports, module) {
                 Dispatcher.trigger('arduino-event-serialmonitor');
                 break;
             */
-            case 'toolbar-console-btn':
-                Console.toggle();
-                console.log(Console.isDisplay());
-                break;
-            case 'toolbar-toggle-btn':
-                if($('#sidebar').is(':visible')){
-                    $('#sidebar').hide();
-                    $('.main-view .content').css('right', '0px');
-                }
-                else{
-                    $('.main-view .content').css('right', '200px');
-                    $('#sidebar').show();
-                }
-                break;
-            default:
-                //console.log(btnid+' clicked');
+        case 'toolbar-console-btn':
+            CommandManager.execute(Commands.TOOLS_CONSOLE_TOOGLE);
+            break;
+        case 'toolbar-toggle-btn':
+            if($('#sidebar').is(':visible')){
+                $('#sidebar').hide();
+                $('.main-view .content').css('right', '0px');
+            }
+            else{
+                $('.main-view .content').css('right', '200px');
+                $('#sidebar').show();
+            }
+            break;
+        default:
+            //console.log(btnId+' clicked');
         }
     }
 });
