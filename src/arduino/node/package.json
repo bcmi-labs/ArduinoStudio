@@ -1,0 +1,7 @@
+{
+  "name": "arduino-core",
+  "version": "0.0.1",
+  "dependencies": {
+    "serialport": "=1.7.4"
+  }
+}
