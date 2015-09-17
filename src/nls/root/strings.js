@@ -423,6 +423,10 @@ define({
     "CMD_OPEN_PREFERENCES"                : "Open Preferences File",
     "CMD_OPEN_KEYMAP"                     : "Open User Key Map",
 
+    //Tools menu commands
+    "TOOLS_MENU"                            : "Tools",
+    "CMD_CONSOLE"                           : "Console",
+
     // Strings for main-view.html
     "EXPERIMENTAL_BUILD"                   : "experimental build",
     "RELEASE_BUILD"                        : "build",

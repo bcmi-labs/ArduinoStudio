@@ -38,8 +38,7 @@ define(function (require, exports, module) {
     var EventDispatcher       = require("utils/EventDispatcher"),
         WorkspaceManager      = require("view/WorkspaceManager"),
         PreferencesManager    = require("preferences/PreferencesManager"),
-        ThemeManager          = require("view/ThemeManager"),
-        ColorUtils            = require("utils/ColorUtils"),
+        Console               = require("arduino/Console"),
 
         consolePanelTemplate  = require("text!htmlContent/console-panel.html");
 
@@ -67,18 +66,26 @@ define(function (require, exports, module) {
         var rgbJQBGColor =  $("#status-bar").css("backgroundColor") ;
         var hexBGColor = ColorUtils.rgbToHex(rgbJQBGColor);
 
-        if(!prefs.get(CONSOLE_SHOW))
+        if(!prefs.get(CONSOLE_SHOW)) {
             this.hide();
-        else
+        }
+        else {
             this.show();
+<<<<<<< HEAD
        
         _changeBackground();
+=======
+        }
+
+        //_changeBackground();
+
+>>>>>>> 6cf963709fbd1a856a260c35a966d373092f1587
     }
 
-    ThemeManager.on("themeChange", function(evt){
+    /*ThemeManager.on("themeChange", function(evt){
         var theme = evt.target; //Theme Object
         _changeBackground();
-    });
+    });*/
 
     EventDispatcher.makeEventDispatcher(ConsoleView.prototype);
 
@@ -185,12 +192,44 @@ define(function (require, exports, module) {
     /**
      * Update the background color of the Console, matching Editor background color.
      */
+<<<<<<< HEAD
     function _changeBackground(){
         var rgbJQBGColor =  $("#status-bar").css("backgroundColor") ;
         var hexBGColor = ColorUtils.rgbToHex(rgbJQBGColor);
         $("#console-panel").css("background-color", hexBGColor);
         $("#logger").css("background-color", hexBGColor);
     }
+=======
+    /*function _changeBackground(){
+        //var rgbJQBGColor =  $(".modal-body").css("background-color") ;
+        //var hexBGColor = ColorUtils.rgbToHex(rgbJQBGColor);
+        //$("#logger").css("background-color", hexBGColor);
+    }*/
+
+    /**
+     * Appends Success/OK log messages into the Console.
+     *
+     * @param {logMessage} msg The msg to log on Console.
+     */
+    ConsoleView.prototype.log = function (msg) {
+        if (this._panel && this._$logger && msg) {
+            switch (msg.type){
+            case Console.LOG_TYPE.INFO:
+                this._$logger.append("[" + msg.timestamp + "] - <span style='color: black;'>" + msg.message + "</span><br />");
+                break;
+            case Console.LOG_TYPE.ERROR:
+                this._$logger.append("[" + msg.timestamp + "] - <span style='color: darkred;'>" + msg.message + "</span><br />");
+                break;
+            case Console.LOG_TYPE.SUCCESS:
+                this._$logger.append("[" + msg.timestamp + "] - <span style='color: darkgreen;'>" + msg.message + "</span><br />");
+                break;
+            }
+            this.trigger("log", msg);
+        }
+    };
+
+
+>>>>>>> 6cf963709fbd1a856a260c35a966d373092f1587
 
     //TODO: add register command for console panel
 

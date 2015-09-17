@@ -2179,7 +2179,7 @@ label input {
     height: 99%;
     max-height: 632px;
     overflow: hidden;
-    background-color: #ffffff;
+    background-color: @bc-panel-bg;
     border: none;
     /*border:1px solid #EEE; border-right:0 solid;*/
     overflow-y: scroll;
@@ -2189,6 +2189,10 @@ label input {
     -webkit-user-select: text;
     -ms-user-select: text;
     user-select: text;
+
+    .dark & {
+        background-color: @dark-bc-panel-bg;
+    }
 }
 
 div#bTag, div#pTag {
