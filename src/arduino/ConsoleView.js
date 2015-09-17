@@ -64,14 +64,15 @@ define(function (require, exports, module) {
         this._panel    = WorkspaceManager.createBottomPanel(panelName, $(panelHtml));
         this._$logger  = this._panel.$panel.find("#logger");
 
+        var rgbJQBGColor =  $("#status-bar").css("backgroundColor") ;
+        var hexBGColor = ColorUtils.rgbToHex(rgbJQBGColor);
 
         if(!prefs.get(CONSOLE_SHOW))
             this.hide();
         else
             this.show();
-
+       
         _changeBackground();
-
     }
 
     ThemeManager.on("themeChange", function(evt){
@@ -185,8 +186,9 @@ define(function (require, exports, module) {
      * Update the background color of the Console, matching Editor background color.
      */
     function _changeBackground(){
-        var rgbJQBGColor =  $(".not-editor").css("background-color") ;
+        var rgbJQBGColor =  $("#status-bar").css("backgroundColor") ;
         var hexBGColor = ColorUtils.rgbToHex(rgbJQBGColor);
+        $("#console-panel").css("background-color", hexBGColor);
         $("#logger").css("background-color", hexBGColor);
     }
 

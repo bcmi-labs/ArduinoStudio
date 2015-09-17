@@ -29,16 +29,18 @@ define(function (require, exports, module) {
 
     var AppInit = require("utils/AppInit"),
     	Console = require("arduino/Console"),
+        ColorUtils = require("utils/ColorUtils"),
     	PreferencesManager = require("preferences/PreferencesManager");
 	
     AppInit.appReady(function () {    	
-    	$('.toolbar-btn').click(function(evt){
+
+        suitableBackground();
+
+        $('.toolbar-btn').click(function(evt){
 			evt.preventDefault();
 			toolbarHandler(this.id);
 		});
     });
-
-    
 
 	function toolbarHandler(btnid){
         switch(btnid) {
@@ -83,5 +85,13 @@ define(function (require, exports, module) {
             default:
                 //console.log(btnid+' clicked');
         }
+    }
+
+    function suitableBackground(){
+        // Setting Console background
+        var rgbJQBGColor =  $("#status-bar").css("backgroundColor") ;
+        var hexBGColor = ColorUtils.rgbToHex(rgbJQBGColor);
+        $("#console-panel").css("background-color", hexBGColor);
+        $("#logger").css("background-color", hexBGColor);
     }
 });
