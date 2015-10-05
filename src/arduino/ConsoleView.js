@@ -63,29 +63,18 @@ define(function (require, exports, module) {
         this._panel    = WorkspaceManager.createBottomPanel(panelName, $(panelHtml));
         this._$logger  = this._panel.$panel.find("#logger");
 
-        var rgbJQBGColor =  $("#status-bar").css("backgroundColor") ;
-        var hexBGColor = ColorUtils.rgbToHex(rgbJQBGColor);
+        //var rgbJQBGColor =  $("#status-bar").css("backgroundColor") ;
+        //var hexBGColor = ColorUtils.rgbToHex(rgbJQBGColor);
 
         if(!prefs.get(CONSOLE_SHOW)) {
             this.hide();
         }
         else {
             this.show();
-<<<<<<< HEAD
-       
-        _changeBackground();
-=======
         }
-
-        //_changeBackground();
-
->>>>>>> 6cf963709fbd1a856a260c35a966d373092f1587
     }
 
-    /*ThemeManager.on("themeChange", function(evt){
-        var theme = evt.target; //Theme Object
-        _changeBackground();
-    });*/
+
 
     EventDispatcher.makeEventDispatcher(ConsoleView.prototype);
 
@@ -190,23 +179,6 @@ define(function (require, exports, module) {
     };
 
     /**
-     * Update the background color of the Console, matching Editor background color.
-     */
-<<<<<<< HEAD
-    function _changeBackground(){
-        var rgbJQBGColor =  $("#status-bar").css("backgroundColor") ;
-        var hexBGColor = ColorUtils.rgbToHex(rgbJQBGColor);
-        $("#console-panel").css("background-color", hexBGColor);
-        $("#logger").css("background-color", hexBGColor);
-    }
-=======
-    /*function _changeBackground(){
-        //var rgbJQBGColor =  $(".modal-body").css("background-color") ;
-        //var hexBGColor = ColorUtils.rgbToHex(rgbJQBGColor);
-        //$("#logger").css("background-color", hexBGColor);
-    }*/
-
-    /**
      * Appends Success/OK log messages into the Console.
      *
      * @param {logMessage} msg The msg to log on Console.
@@ -227,11 +199,6 @@ define(function (require, exports, module) {
             this.trigger("log", msg);
         }
     };
-
-
->>>>>>> 6cf963709fbd1a856a260c35a966d373092f1587
-
-    //TODO: add register command for console panel
 
     // Public API
     exports.ConsoleView = ConsoleView;

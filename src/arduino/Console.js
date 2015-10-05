@@ -156,7 +156,7 @@ define(function (require, exports, module) {
         });
     });
 
-    CommandManager.register(Strings.CMD_CONSOLE_TOOGLE, Commands.TOOLS_CONSOLE_TOOGLE, toggle);
+    CommandManager.register(Strings.CMD_CONSOLE, Commands.TOOLS_CONSOLE_TOOGLE, toggle);
 
 
 /*    AppInit.appReady(function () {
@@ -172,4 +172,5 @@ define(function (require, exports, module) {
     exports.logInfo = logInfo;
     exports.logError = logError;
     exports.logSuccess = logSuccess;
+    exports.LOG_TYPE = LOG_TYPE;
 });
