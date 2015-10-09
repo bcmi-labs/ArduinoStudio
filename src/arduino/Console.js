@@ -26,8 +26,12 @@
  */
 
 
-/*jslint vars: true, plusplus: true, devel: true, nomen: true, indent: 4, maxerr: 50 */
+/**
+ * questo modulo é una sorta di interfaccia per le api core della console, utilizzabile nei moduli di AS o nelle estensioni utente da un lato,
+ * mentre dall'altro e la
+ */
 
+/*jslint vars: true, plusplus: true, devel: true, nomen: true, indent: 4, maxerr: 50 */
 define(function (require, exports, module) {
     "use strict";
 
@@ -38,20 +42,43 @@ define(function (require, exports, module) {
         Commands            = require("command/Commands"),
         CommandManager      = require("command/CommandManager"),
         Strings             = require("strings"),
-        ConsoleView         = require("arduino/ConsoleView").ConsoleView;
+        FileSystem          = require("filesystem/FileSystem"),
+        FileUtils           = require("file/FileUtils");
+
 
     // make sure the global brackets variable is loaded
-    require("utils/Global");
+    // require("utils/Global");
 
-    PreferencesManager.definePreference("arduino.consoleShow", "boolean", true);
+    /**
+     * @type {string} _consoleDefaultModule is the path of the default Console Module
+     * @private
+     */
+    var _consoleDefaultModule = FileUtils.getNativeBracketsDirectoryPath() + "/" + FileUtils.getNativeModuleDirectoryPath(module) + "/ConsoleView.js";
+
+    /**
+     *
+     * @type {Object} LOG_TYPE Contains key/value informations to determinate the logging type.
+     */
+    var LOG_TYPE = {
+            ERROR:      "logType.Error",
+            INFO:       "logType.Info",
+            SUCCESS:     "logType.Success",
+            WARNING:    "logType.Warning"
+    };
+
+    /**
+     * @type {PrefixedPreferencesSystem} _prefs
+     * @private
+     */
+    var _prefs = PreferencesManager.getExtensionPrefs("arduino.panel.console");
+
+    /** @type {ConsoleView} The console view. Initialized in htmlReady() */
+    var _consoleView = null;
+
+    PreferencesManager.definePreference("arduino.panel.console.show", "boolean", true);
+    PreferencesManager.definePreference("arduino.panel.console.module.default", "string", _consoleDefaultModule);
 
     EventDispatcher.makeEventDispatcher(exports);
-
-    var LOG_TYPE = {
-        ERROR:      "logType.Error",
-        INFO:       "logType.Info",
-        SUCESS:     "logType.Success"
-    };
 
     /**
      * @constructor
@@ -66,14 +93,13 @@ define(function (require, exports, module) {
         this.timestamp = new Date().toLocaleString();
     }
 
-    /** @type {ConsoleView} The console view. Initialized in htmlReady() */
-    var _consoleView = null;
-
     /**
      * Hides the Console Panel
      */
     function hide() {
         _consoleView.hide();
+        _prefs.set("show", false);
+        exports.trigger("hide");
     }
 
     /**
@@ -81,6 +107,8 @@ define(function (require, exports, module) {
      */
     function show() {
         _consoleView.show();
+        _prefs.set("show", true);
+        exports.trigger("show");
     }
 
     /**
@@ -91,10 +119,16 @@ define(function (require, exports, module) {
     }
 
     /**
-     * Says if the Console Panel is visible
+     * Shows if is invisible or hides if visible
      */
     function toggle() {
-        _consoleView.toggle();
+        if(isVisible()){
+            hide();
+        }
+        else{
+            show();
+        }
+        exports.trigger("toggle");
     }
 
     /**
@@ -102,6 +136,7 @@ define(function (require, exports, module) {
      */
     function clear() {
         _consoleView.clear();
+        exports.trigger("clear");
     }
 
     /**
@@ -113,6 +148,7 @@ define(function (require, exports, module) {
         if(data) {
             var msg = new Message(data, LOG_TYPE.INFO);
             _consoleView.log(msg);
+            exports.trigger("log-info", msg);
         }
     }
 
@@ -125,6 +161,8 @@ define(function (require, exports, module) {
         if(data) {
             var msg = new Message(data, LOG_TYPE.ERROR);
             _consoleView.log(msg);
+            exports.trigger("log-error", msg);
+
         }
     }
 
@@ -137,31 +175,142 @@ define(function (require, exports, module) {
         if(data) {
             var msg = new Message(data, LOG_TYPE.SUCCESS);
             _consoleView.log(msg);
+            exports.trigger("log-success", msg);
+        }
+    }
+
+    /**
+     * Log a warning message to the Console Panel
+     *
+     * @param {Object} data The message to log on the Console.
+     */
+    function logWarning(data) {
+        if(data) {
+            var msg = new Message(data, LOG_TYPE.WARNING);
+            _consoleView.log(msg);
+            exports.trigger("log-warning", msg);
+        }
+    }
+
+    /**
+     * Load Console Module and return a promise
+     * @param {String} moduleName The module name used to get the module and load it.
+     * @returns {JQuery.Promise} the promise resolves if the module is loaded and fails if there's errors
+     */
+    function loadModule(moduleName){
+        var $deferred = new $.Deferred();
+        var moduleFilePath = _prefs.get("module." + moduleName),
+            moduleDefaultFilePath = _prefs.get("module.default");
+        if(moduleFilePath !== undefined) {
+
+            //TODO: se carico un modulo, che é gia caricato, non caricarlo.
+
+            var file = FileSystem.getFileForPath(moduleFilePath);
+            file.exists(function (err, status) {
+                if (status) {
+                    _load(moduleFilePath, function(error){
+                        if(error){
+                            $deferred.fail(error);
+                        }
+                        else{
+                            $deferred.resolve();
+                        }
+                    });
+                }
+                else {
+                    _load(moduleDefaultFilePath, function(error){
+                        if(error){
+                            $deferred.fail(error);
+                        }
+                        else{
+                            $deferred.resolve();
+                        }
+                    });
+                }
+            });
+        }
+        else{
+            _load(moduleDefaultFilePath, function(error){
+                if(error){
+                    $deferred.fail(error);
+                }
+                else{
+                    $deferred.resolve();
+                }
+            });
+        }
+
+        return $deferred.promise();
+    }
+
+    //TODO: implementare un meccanismo che permetta di capire se il modulo rispetta le interfacce.
+    //TODO: implementare un meccanismo che permetta la registrazione di altri moduli, che vengono caricati come estensione
+    //TODO: quando si fa il load e l'unload del modulo, si dovrebbe prevedere che venga fatto dentro la cornice,
+    // e non rimuovere tutto, ma solo quello contenuto dentro.
+
+    //function registerModule(moduleName, modulePath){
+    //
+    //}
+
+    /**
+     * Loads the specified module
+     * @param {String} modulePath the path to javascript module
+     * @param {Function} callback - call backs only errors
+     * @private
+     */
+    function _load(modulePath, callback){
+        _unload(function(error){
+            if(!error) {
+                require([modulePath], function (res) {
+                    _consoleView = res;
+                    _consoleView.init("");
+                    if( !!_prefs.get("show") ) {
+                        show();
+                    }
+                    else {
+                        hide();
+                    }
+                    callback(null);
+                });
+            }
+            else{
+                callback(error)
+            }
+        });
+    }
+
+    /**
+     * Unloads the current module
+     * @private
+     */
+    function _unload(callback){
+        try {
+            if (_consoleView) {
+                _consoleView.dispose();
+                _consoleView = null;
+            }
+            callback(null);
+        }
+        catch(error){
+            callback(error);
         }
     }
 
     AppInit.htmlReady(function () {
-        _consoleView = new ConsoleView("arduino-console");
-        _consoleView.on("hide", function(){
-            exports.trigger("hide");
-        });
-        _consoleView.on("show", function(){
-            exports.trigger("show");
-        });
-        _consoleView.on("clear", function(){
-            exports.trigger("clear");
-        });
-        _consoleView.on("log", function(evt, msg){
-            exports.trigger("log", msg);
+        loadModule("default").done(function(){
+            if( !!_prefs.get("show") ) {
+                show();
+            }
+            else {
+                hide();
+            }
+        })
+        .fail(function(err){
+
         });
     });
 
     CommandManager.register(Strings.CMD_CONSOLE, Commands.TOOLS_CONSOLE_TOOGLE, toggle);
-
-
-/*    AppInit.appReady(function () {
-        $("#toolbar-console-btn").click( toggle );
-    });*/
 
     // Define public API
     exports.show = show;
@@ -172,5 +321,8 @@ define(function (require, exports, module) {
     exports.logInfo = logInfo;
     exports.logError = logError;
     exports.logSuccess = logSuccess;
+    exports.logWarning = logWarning;
+    exports.loadModule = loadModule;
+    //exports.registerModule = registerModule;
     exports.LOG_TYPE = LOG_TYPE;
 });
