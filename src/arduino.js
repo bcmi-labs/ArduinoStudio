@@ -28,25 +28,7 @@ define(function (require, exports, module) {
     "use strict";
 
     var AppInit = require("utils/AppInit"),
-<<<<<<< HEAD
-    	Console = require("arduino/Console"),
-        ColorUtils = require("utils/ColorUtils"),
-    	PreferencesManager = require("preferences/PreferencesManager");
-	
-    AppInit.appReady(function () {    	
-
-        suitableBackground();
-
-        $('.toolbar-btn').click(function(evt){
-			evt.preventDefault();
-			toolbarHandler(this.id);
-		});
-    });
-
-	function toolbarHandler(btnid){
-        switch(btnid) {
-=======
-        //Console = require("arduino/Console"),
+        Console = require("arduino/Console"),
         CommandManager = require("command/CommandManager"),
         Commands = require("command/Commands");
         //PreferencesManager = require("preferences/PreferencesManager");
@@ -66,7 +48,6 @@ define(function (require, exports, module) {
      */
 	function toolbarHandler(btnId){
         switch(btnId) {
->>>>>>> 6cf963709fbd1a856a260c35a966d373092f1587
             /*
             case 'toolbar-verify-btn':
                 CommandManager.execute(Commands.FILE_SAVE);

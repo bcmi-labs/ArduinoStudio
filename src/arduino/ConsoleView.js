@@ -22,7 +22,8 @@
  * Copyright 2015 Arduino Srl (http://www.arduino.org/) support@arduino.org
  *
  * authors:     sergio@arduino.org
- * date:        04 Sep 2015
+ * create:      04 Sep 2015
+ * edit:        09 Oct 2015 sergio@arduino.org
  *
  */
 
@@ -35,204 +36,145 @@
 define(function (require, exports, module) {
     "use strict";
 
-    var EventDispatcher       = require("utils/EventDispatcher"),
+    var //EventDispatcher       = require("utils/EventDispatcher"),
         WorkspaceManager      = require("view/WorkspaceManager"),
         PreferencesManager    = require("preferences/PreferencesManager"),
         Console               = require("arduino/Console"),
 
-        consolePanelTemplate  = require("text!htmlContent/console-panel.html");
+        _consolePanelTemplate  = require("text!htmlContent/console-panel.html");
 
-    var prefs = PreferencesManager.getExtensionPrefs("arduino");
+    var  _panelHtml, _panel, _$panel, _$logger;
 
-    /**
-     * @const
-     * Name of preferences to use in PreferencesManager.
-     * @type {String}
-     */
-    var CONSOLE_SHOW = "consoleShow";
-
-    /**
-     * @constructor
-     * Handles the Console panel.
-     *
-     * @param {string} panelName The name to use for the panel, as passed to PanelManager.createBottomPanel().
-     */
-    function ConsoleView(panelName) {
-        var panelHtml  = Mustache.render(consolePanelTemplate, {});
-
-        this._panel    = WorkspaceManager.createBottomPanel(panelName, $(panelHtml));
-        this._$logger  = this._panel.$panel.find("#logger");
-
-        var rgbJQBGColor =  $("#status-bar").css("backgroundColor") ;
-        var hexBGColor = ColorUtils.rgbToHex(rgbJQBGColor);
-
-        if(!prefs.get(CONSOLE_SHOW)) {
-            this.hide();
-        }
-        else {
-            this.show();
-<<<<<<< HEAD
-       
-        _changeBackground();
-=======
-        }
-
-        //_changeBackground();
-
->>>>>>> 6cf963709fbd1a856a260c35a966d373092f1587
+    function init(panelName) {
+        _panelHtml  = Mustache.render(_consolePanelTemplate, {});
+        _panel      = WorkspaceManager.createBottomPanel(panelName, $(_panelHtml));
+        _$panel     = _panel.$panel;
+        _$logger    = _$panel.find("#logger");
     }
 
-    /*ThemeManager.on("themeChange", function(evt){
-        var theme = evt.target; //Theme Object
-        _changeBackground();
-    });*/
-
-    EventDispatcher.makeEventDispatcher(ConsoleView.prototype);
-
-    /** @type {ConsoleModel} The Console model we're viewing. */
-    //ConsoleView.prototype._model = null;
-
-    /** @type {Panel} Bottom panel holding the Console */
-    ConsoleView.prototype._panel = null;
-
-    /** @type {$.Element} The element where the console log is placed */
-    ConsoleView.prototype._$logger = null;
+    /**
+     * Dispose the Console panel.
+     */
+    function dispose() {
+        if(_panel){
+            _$panel.remove();
+        }
+    }
 
     /**
      * Shows the Console panel.
      */
-    ConsoleView.prototype.show = function () {
-        if(this._panel && !this._panel.isVisible()){
-            this._panel.show();
-            prefs.set(CONSOLE_SHOW, true);
-            this.trigger("show");
+    function show() {
+        if(_panel && !_panel.isVisible()){
+            _panel.show();
         }
-    };
+    }
 
     /**
      * Hides the Console Panel.
      */
-    ConsoleView.prototype.hide = function () {
-        if (this._panel && this._panel.isVisible()) {
-            this._panel.hide();
-            prefs.set(CONSOLE_SHOW, false);
-            this.trigger("hide");
+    function hide() {
+        if (_panel && _panel.isVisible()) {
+            _panel.hide();
         }
-    };
+    }
 
     /**
      * Says if the Console Panel is visible.
      * @return {boolean}
      */
-    ConsoleView.prototype.isVisible = function () {
-        if (this._panel && this._panel.isVisible()) {
+    function isVisible() {
+        if (_panel && _panel.isVisible()) {
             return true;
         }
         else{
             return false;
         }
-    };
+    }
 
     /**
      * Changes status visible/not-visible of the Console Panel.
      */
-    ConsoleView.prototype.toggle = function () {
-        if (this._panel && this._panel.isVisible()) {
-            this.hide();
+    function toggle() {
+        if (_panel && _panel.isVisible()) {
+            hide();
         }
         else{
-            this.show();
+            show();
         }
-    };
-
+    }
 
     /**
      * Clears the Console Log panel.
      */
-    ConsoleView.prototype.clear = function () {
-        if (this._panel && this._$logger) {
-            this._$logger.empty();
-            this.trigger("clear");
+    function clear() {
+        if (_panel && _$logger) {
+            _$logger.empty();
         }
-    };
+    }
 
     /**
      * Appends Info log messages into the Console.
      *
      * @param {string} message The message to log on Console.
      */
-    ConsoleView.prototype.logInfo = function (message) {
-        if (this._panel && this._$logger) {
-            this._$logger.append("[" + new Date().toLocaleString() + "] - <span style='color: black;'>" + message + "</span><br />");
-        }
-    };
+    //function logInfo(message) {
+    //    if (this._panel && this._$logger) {
+    //        this._$logger.append("[" + new Date().toLocaleString() + "] - <span style='color: black;'>" + message + "</span><br />");
+    //    }
+    //}
 
     /**
      * Appends Error log messages into the Console.
      *
      * @param {string} message The message to log on Console.
      */
-    ConsoleView.prototype.logError = function (message) {
-        if (this._panel && this._$logger) {
-            this._$logger.append("[" + new Date().toLocaleString() + "] - <span style='color: darkred;'>" + message + "</span><br />");
-        }
-    };
+    //function logError(message) {
+    //    if (this._panel && this._$logger) {
+    //        this._$logger.append("[" + new Date().toLocaleString() + "] - <span style='color: darkred;'>" + message + "</span><br />");
+    //    }
+    //}
 
     /**
      * Appends Success/OK log messages into the Console.
      *
      * @param {string} message The message to log on Console.
      */
-    ConsoleView.prototype.logSuccess = function (message) {
-        if (this._panel && this._$logger) {
-            this._$logger.append("[" + new Date().toLocaleString() + "] - <span style='color: darkgreen;'>" + message + "</span><br />");
-        }
-    };
-
-    /**
-     * Update the background color of the Console, matching Editor background color.
-     */
-<<<<<<< HEAD
-    function _changeBackground(){
-        var rgbJQBGColor =  $("#status-bar").css("backgroundColor") ;
-        var hexBGColor = ColorUtils.rgbToHex(rgbJQBGColor);
-        $("#console-panel").css("background-color", hexBGColor);
-        $("#logger").css("background-color", hexBGColor);
-    }
-=======
-    /*function _changeBackground(){
-        //var rgbJQBGColor =  $(".modal-body").css("background-color") ;
-        //var hexBGColor = ColorUtils.rgbToHex(rgbJQBGColor);
-        //$("#logger").css("background-color", hexBGColor);
-    }*/
+    // function logSuccess(message) {
+    //    if (this._panel && this._$logger) {
+    //        this._$logger.append("[" + new Date().toLocaleString() + "] - <span style='color: darkgreen;'>" + message + "</span><br />");
+    //    }
+    //}
 
     /**
      * Appends Success/OK log messages into the Console.
      *
      * @param {logMessage} msg The msg to log on Console.
      */
-    ConsoleView.prototype.log = function (msg) {
-        if (this._panel && this._$logger && msg) {
+    function log(msg) {
+        if (_panel && _$logger && msg) {
             switch (msg.type){
             case Console.LOG_TYPE.INFO:
-                this._$logger.append("[" + msg.timestamp + "] - <span style='color: black;'>" + msg.message + "</span><br />");
+                _$logger.append("[" + msg.timestamp + "] - <span style='color: black;'>" + msg.message + "</span><br />");
                 break;
             case Console.LOG_TYPE.ERROR:
-                this._$logger.append("[" + msg.timestamp + "] - <span style='color: darkred;'>" + msg.message + "</span><br />");
+                _$logger.append("[" + msg.timestamp + "] - <span style='color: darkred;'>" + msg.message + "</span><br />");
                 break;
             case Console.LOG_TYPE.SUCCESS:
-                this._$logger.append("[" + msg.timestamp + "] - <span style='color: darkgreen;'>" + msg.message + "</span><br />");
+                _$logger.append("[" + msg.timestamp + "] - <span style='color: darkgreen;'>" + msg.message + "</span><br />");
                 break;
             }
-            this.trigger("log", msg);
         }
-    };
-
-
->>>>>>> 6cf963709fbd1a856a260c35a966d373092f1587
-
-    //TODO: add register command for console panel
+    }
 
     // Public API
-    exports.ConsoleView = ConsoleView;
+    module.exports.show = show;
+    module.exports.hide = hide;
+    module.exports.isVisible = isVisible;
+    module.exports.toogle = toggle;
+    module.exports.log = log;
+    module.exports.clear = clear;
+    module.exports.dispose = dispose;
+    module.exports.init = init;
+
 });
