@@ -2,6 +2,7 @@
   "name": "arduino-core",
   "version": "0.0.1",
   "dependencies": {
-    "async": "1.4.2"
+    "async": "1.4.2",
+    "serialport": "1.7.4"
   }
 }
