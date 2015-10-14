@@ -61,7 +61,9 @@ module.exports = function (grunt) {
                             'thirdparty/requirejs/require.js',
                             'LiveDevelopment/launch.html',
                             'LiveDevelopment/MultiBrowserImpl/transports/**',
-                            'LiveDevelopment/MultiBrowserImpl/launchers/**'
+                            'LiveDevelopment/MultiBrowserImpl/launchers/**',
+                            'arduino/node/**',
+                            'arduino/ConsoleView.js'
                         ]
                     },
                     /* node domains are not minified and must be copied to dist */

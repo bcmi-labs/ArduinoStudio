@@ -27,8 +27,14 @@
 define(function (require, exports, module) {
     "use strict";
 
+    //Arduino Stuffs
+    require("arduino/Console");
+    require("arduino/ConsoleView");
+    require("arduino/SerialPort");
+    require("arduino/Discovery");
+    require("text!htmlContent/console-panel.html");
+
     var AppInit = require("utils/AppInit"),
-        Console = require("arduino/Console"),
         CommandManager = require("command/CommandManager"),
         Commands = require("command/Commands");
         //PreferencesManager = require("preferences/PreferencesManager");
@@ -88,13 +94,5 @@ define(function (require, exports, module) {
         default:
             //console.log(btnId+' clicked');
         }
-    }
-
-    function suitableBackground(){
-        // Setting Console background
-        var rgbJQBGColor =  $("#status-bar").css("backgroundColor") ;
-        var hexBGColor = ColorUtils.rgbToHex(rgbJQBGColor);
-        $("#console-panel").css("background-color", hexBGColor);
-        $("#logger").css("background-color", hexBGColor);
     }
 });
